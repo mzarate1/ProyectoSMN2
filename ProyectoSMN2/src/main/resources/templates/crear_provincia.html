@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf 8">
+	<title>Crear Provincia</title>
+	<!-- CSS only -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+	<a class="navbar-brand" href="#"></a>
+	<!-- Navbar links-->
+	<div class="collapse navbar-collapse" id="collapsibleNavbar">
+		<ul class="navbar-nav">
+			<li class="nav-item"><a class="nav-link"
+				th:href="@{/provincias}"> ABM de provincias</a></li>
+		</ul>
+	</div>
+	</nav>
+	
+	<br>
+	<div class="container">
+		</div>
+			<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+				<h1 class="text-center">Nueva Provincia</h1>
+				<div class="card-body">
+					<form th:action="@{/provincias}" th:object="${provincia}" method="POST">
+						<div class="form-group">
+							<label>Nombre: </label>
+							<input type="text" name="nombre_provincia" th:field="*{nombre_provincia}" class="form-control" placeholder="nombre de la provincia" required>
+						</div>
+						<br>
+						<div class="box-footer">
+							<button class="btn btn-success">Guardar</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

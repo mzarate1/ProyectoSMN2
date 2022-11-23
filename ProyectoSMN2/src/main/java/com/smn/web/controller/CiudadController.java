@@ -20,7 +20,7 @@ public class CiudadController {
 	private CiudadServiceImpl servicio;
 	
 	@Autowired
-    private ProvinciaServiceImpl servicioProvincia;
+	private ProvinciaServiceImpl servicioProvincia;
 
 	@GetMapping("/ciudades")
 	public String listarCiudades(Model modelo) {
@@ -35,11 +35,12 @@ public class CiudadController {
 		return "crear_ciudad";
 	}
 	
-	@ModelAttribute("allProvincias")
-    public List<Provincia> getAllProvincias() {
-        return this.servicioProvincia.listarProvincias();
-    }
 	
+	
+	@ModelAttribute("allCiudades")
+    public List<Ciudad> getAllCiudades() {
+        return this.servicio.listarCiudades();
+    }
 	
 	@PostMapping("/ciudades")
 	public String guardarCiudad(@ModelAttribute("ciudad") Ciudad ciudad) {
@@ -69,5 +70,8 @@ public class CiudadController {
 		servicio.eliminarCiudad(ciudadExistente);
 		return "redirect:/ciudades";
 	}
-	
+	@ModelAttribute("allProvincias")
+    public List<Provincia> getAllProvincias() {
+        return this.servicioProvincia.listarProvincias();
+    }
 }

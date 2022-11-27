@@ -38,14 +38,14 @@ public class CiudadController {
         return this.servicioProvincia.listarProvincias();
     }
 		
-	@GetMapping("/ciudades/nuevo")
+	@GetMapping("/ciudad/nuevo")
 	public String mostrarFomularioCiudad(Model modelo) {
 		Ciudad ciudad = new Ciudad ();
 		modelo.addAttribute("ciudades", ciudad);
 		return "crear_ciudad";
 	}
 	
-	@PostMapping("/ciudades")
+	@PostMapping("/ciudad/agregar")
 	public String guardarCiudad(@ModelAttribute("ciudad") Ciudad ciudad) {
 		servicio.guardarCiudad(ciudad);
 		return "redirect:/ciudades";

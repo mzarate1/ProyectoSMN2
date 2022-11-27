@@ -22,8 +22,13 @@ public class ProvinciaController {
 	@GetMapping("/provincias")
 	public String listarProvincias(Model modelo) {
 		modelo.addAttribute("provincias", servicio.listarProvincias());
-		return "provincias"; // nos retorna el archivo provincias
+		return "provincias";
 	}
+	
+	@ModelAttribute("allProvincias")
+    public List<Provincia> getAllProvincias() {
+        return this.servicio.listarProvincias();
+    }
 
 	@GetMapping("/provincias/nuevo")
 	public String mostrarFomularioProvincia(Model modelo) {
@@ -32,7 +37,7 @@ public class ProvinciaController {
 		return "crear_provincia";
 	}
 
-	@PostMapping("/provincias")
+	@PostMapping("/provincias/agregar")
 	public String guardarProvincia(@ModelAttribute("provincia") Provincia provincia) {
 		servicio.guardarProvincia(provincia);
 		return "redirect:/provincias";
@@ -60,10 +65,5 @@ public class ProvinciaController {
 		servicio.eliminarProvincia(id);
 		return "redirect:/provincias";
 	}
-	
-	@ModelAttribute("allProvincias")
-    public List<Provincia> getAllProvincias() {
-        return this.servicio.listarProvincias();
-    }
 	
 }

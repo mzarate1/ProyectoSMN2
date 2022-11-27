@@ -34,29 +34,30 @@
 		</ul>
 	</div>
 	</nav>
-	
+
 	<br>
 	<div class="container">
 		</div>
 			<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
 				<h1 class="text-center">Modificar un Registro del Clima</h1>
-				<div class="card-body">
+				<div class="card-body"> 
 					<form th:action="@{/consultar_clima/{id}(id=${clima.id_clima})}" th:object="${clima}" method="POST">
 						<div class="form-group">
 							<label>Fecha: </label>
 							<br>
-							<input type="text" id="fecha" autocomplete="off" th:field="*{fecha}" placeholder="AAAA/MM/DD" />
+							<input type="text" id="fecha" autocomplete="off" th:field="*{fecha}" placeholder="YYYY/MM/DD" />
 							<br>
 							<label>Temperatura: </label>
 							<input type="text" name="temperatura" th:field="*{temperatura}" class="form-control" placeholder="temperatura" required/>
 							<label>Humedad: </label>
 							<input type="text" name="humedad" th:field="*{humedad}" class="form-control" placeholder="humedad" required/>
 						</div>
+						
 						<br>
 						<div class="form-group">
 							<label>Estado del Clima: </label>
 							<select th:field="*{id_estado}">
-		         				<option th:each="ec : ${allEstadoClima}" 
+		         				<option th:each="ec : ${allEstadoClimas}" 
 				          				th:value="${ec.id_estado}" 
 				          				th:text="${ec.dsc_estado}"></option>
 							</select>

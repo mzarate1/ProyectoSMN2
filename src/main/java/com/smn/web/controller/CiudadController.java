@@ -25,8 +25,18 @@ public class CiudadController {
 	@GetMapping("/ciudades")
 	public String listarCiudades(Model modelo) {
 		modelo.addAttribute("ciudades", servicio.listarCiudades());
-		return "ciudades"; // nos retorna el archivo provincias
+		return "ciudades";
 	}
+	
+	@ModelAttribute("allCiudades")
+    public List<Ciudad> getAllCiudades() {
+        return this.servicio.listarCiudades();
+    }
+	
+	@ModelAttribute("allProvincias")
+    public List<Provincia> getAllProvincias() {
+        return this.servicioProvincia.listarProvincias();
+    }
 		
 	@GetMapping("/ciudades/nuevo")
 	public String mostrarFomularioCiudad(Model modelo) {
@@ -34,13 +44,6 @@ public class CiudadController {
 		modelo.addAttribute("ciudades", ciudad);
 		return "crear_ciudad";
 	}
-	
-	
-	
-	@ModelAttribute("allCiudades")
-    public List<Ciudad> getAllCiudades() {
-        return this.servicio.listarCiudades();
-    }
 	
 	@PostMapping("/ciudades")
 	public String guardarCiudad(@ModelAttribute("ciudad") Ciudad ciudad) {
@@ -70,8 +73,5 @@ public class CiudadController {
 		servicio.eliminarCiudad(ciudadExistente);
 		return "redirect:/ciudades";
 	}
-	@ModelAttribute("allProvincias")
-    public List<Provincia> getAllProvincias() {
-        return this.servicioProvincia.listarProvincias();
-    }
+	
 }

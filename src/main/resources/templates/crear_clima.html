@@ -58,7 +58,7 @@
 					<br>
 					<select th:field="*{id_estado}">
 					<!--<option value={"null"} text="opcion"></option>-->
-		         		<option th:each="ec : ${allEstadoClima}" 
+		         		<option th:each="ec : ${allEstadoClimas}" 
 				          	th:value="${ec.id_estado}" 
 				          	th:text="${ec.dsc_estado}"></option>
 					</select>

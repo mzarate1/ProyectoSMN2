@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "clima")
@@ -19,12 +20,15 @@ public class Clima {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_clima;
 	
+	@NotNull
 	@Column(name = "fecha", nullable = false)
 	private Date fecha;
 	
+	@NotNull
 	@Column(name = "temperatura", nullable = false)
 	private int temperatura;
 	
+	@NotNull
 	@Column(name = "humedad", nullable = false)
 	private int humedad;
 	

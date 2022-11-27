@@ -36,12 +36,6 @@ public class CiudadController {
 	}
 	
 	
-	
-	@ModelAttribute("allCiudades")
-    public List<Ciudad> getAllCiudades() {
-        return this.servicio.listarCiudades();
-    }
-	
 	@PostMapping("/ciudades")
 	public String guardarCiudad(@ModelAttribute("ciudad") Ciudad ciudad) {
 		servicio.guardarCiudad(ciudad);

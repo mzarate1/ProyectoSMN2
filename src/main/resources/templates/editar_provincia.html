@@ -31,6 +31,7 @@
 						<div class="form-group">
 							<label>Nombre: </label>
 							<input type="text" name="nombre_provincia" th:field="*{nombre_provincia}" class="form-control" placeholder="nombre de la provincia" required>
+							<td> <p class="form text text-danger" th:if="${#fields.hasErrors('nombre_provincia')}" th:errorclass="error" th:errors="*{nombre_provincia}"/> </td> 
 						</div>
 						<br>
 						<div class="box-footer">

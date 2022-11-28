@@ -26,16 +26,19 @@
 			<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
 				<h1 class="text-center">Nueva Ciudad</h1>
 			<div class="card-body">
-			<form  th:action="@{/ciudad/agregar}" th:object="${ciudades}" method="POST">
+			<form  th:action="@{/ciudad/agregar}" th:object="${ciudad}" method="POST">
+				<tr>
 				<div class="form-group">
 					<label>Nombre: </label>
 					<input type="text" name="nombre_ciudad" th:field="*{nombre_ciudad}" class="form-control" placeholder="nombre de la ciudad" required>
+					<td> <p class="form text text-danger" th:if="${#fields.hasErrors('nombre_ciudad')}" th:errorclass="error" th:errors="*{nombre_ciudad}"/> </td>
 				</div>
+				</tr>
 				<br>
 				<div class="form-group">
 					<label>Provincia: </label>
 					<select th:field="*{id_provincia}">
-					  	<option value={"null"} text="opcion"</option>
+					  	<!--<option value={"null"} text="opcion"></option>-->
 		         		<option th:each="p : ${allProvincias}" 
 				          	th:value="${p.id_provincia}" 
 				          	th:text="${p.nombre_provincia}"></option>

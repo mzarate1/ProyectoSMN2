@@ -2,9 +2,12 @@ package com.smn.web.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -53,7 +56,15 @@ public class ConsutaClimaController {
 	}
 	
 	@PostMapping("/clima/agregar")
-	public String guardarCiudad(@ModelAttribute("clima") Clima clima) {
+	public String guardarCiudad(@Valid @ModelAttribute("clima") Clima clima, BindingResult result, Model modelo) {
+		
+		if(result.hasErrors()) 
+		{
+			modelo.addAttribute("clima", clima);
+			System.out.println("Hubo errores");
+			return "crear_clima";	
+		}
+		
 		servicioClima.guardarClima(clima);
 		return "redirect:/consultar_clima";
 	}

@@ -1,9 +1,13 @@
 package com.smn.web.controller;
 
 import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,12 +45,21 @@ public class CiudadController {
 	@GetMapping("/ciudad/nuevo")
 	public String mostrarFomularioCiudad(Model modelo) {
 		Ciudad ciudad = new Ciudad ();
-		modelo.addAttribute("ciudades", ciudad);
+		modelo.addAttribute("ciudad", ciudad);
 		return "crear_ciudad";
 	}
 	
 	@PostMapping("/ciudad/agregar")
-	public String guardarCiudad(@ModelAttribute("ciudad") Ciudad ciudad) {
+	public String guardarCiudad(@Valid @ModelAttribute("ciudad") Ciudad ciudad, BindingResult result, Model modelo) {
+		
+		if(result.hasErrors()) 
+		{
+			modelo.addAttribute("ciudad", ciudad);
+			System.out.println("Hubo errores");
+			return "crear_ciudad";	
+		}
+		
+		ciudad.setNombre_ciudad(ciudad.getNombre_ciudad().toLowerCase());
 		servicio.guardarCiudad(ciudad);
 		return "redirect:/ciudades";
 	}
@@ -59,9 +72,17 @@ public class CiudadController {
 	}
 
 	@PostMapping("/ciudades/{id}")
-	public String actualizarCiudad(@PathVariable Long id, @ModelAttribute("ciudad") Ciudad ciudad, Model modelo) {
+	public String actualizarCiudad(@Valid @PathVariable Long id, @ModelAttribute("ciudad") Ciudad ciudad, BindingResult result, Model modelo) {
 		Ciudad ciudadExistente = servicio.obtenerCiudadId(id);
-		ciudadExistente.setNombre_ciudad(ciudad.getNombre_ciudad());
+		
+		if(result.hasErrors()) 
+		{
+			modelo.addAttribute("ciudad", servicio.obtenerCiudadId(id));
+			System.out.println("Hubo errores");
+			return "editar_ciudad";	
+		}
+		
+		ciudadExistente.setNombre_ciudad(ciudad.getNombre_ciudad().toLowerCase());
 		ciudadExistente.setId_provincia(ciudad.getId_provincia());
 		servicio.actualizarCiudad(ciudadExistente);
 		return "redirect:/ciudades";

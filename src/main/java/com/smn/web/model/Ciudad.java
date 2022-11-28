@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "ciudad")
@@ -17,7 +18,8 @@ public class Ciudad {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_ciudad;
 	
-	@Column(name = "nombre_ciudad", nullable = false, length = 50)
+	@Size(min=4, max=10, message = "Nombre Ciudad, debe tener entre 4 a 10 caracteres")
+	@Column(name = "nombre_ciudad", nullable = false, length = 10)
 	private String nombre_ciudad;
 	
 	@JoinColumn(name = "id_provincia", nullable = false)

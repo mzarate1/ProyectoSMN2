@@ -28,10 +28,13 @@
 				<h1 class="text-center">Nueva Provincia</h1>
 				<div class="card-body">
 					<form th:action="@{/provincia/agregar}" th:object="${provincia}" method="POST">
+						<tr>
 						<div class="form-group">
 							<label>Nombre: </label>
 							<input type="text" name="nombre_provincia" th:field="*{nombre_provincia}" class="form-control" placeholder="nombre de la provincia" required>
+							<td> <p class="form text text-danger" th:if="${#fields.hasErrors('nombre_provincia')}" th:errorclass="error" th:errors="*{nombre_provincia}"/> </td> 
 						</div>
+						</tr>
 						<br>
 						<div class="box-footer">
 							<button class="btn btn-success">Guardar</button>

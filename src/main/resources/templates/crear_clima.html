@@ -42,17 +42,22 @@
 				<h1 class="text-center">Nuevo Registro del Clima</h1>
 			<div class="card-body">
 			<form  th:action="@{/clima/agregar}" th:object="${clima}" method="POST">
+				<tr>
 				<div class="form-group">
 					<label>Fecha: </label>
 					<br>
 					<!-- <input type="text" name="fecha" th:field="*{fecha}" class="form-control" placeholder="fecha" required>-->
 					<input type="text" id="fecha" name="fecha" autocomplete="off" th:field="*{fecha}" placeholder="YYYYY/MM/DD"/>
+					<td> <p class="form text text-danger" th:if="${#fields.hasErrors('fecha')}" th:errorclass="error" th:errors="*{fecha}"/> </td>
 					<br>
 					<label>Temperatura: </label>
 					<input type="text" name="temperatura" th:field="*{temperatura}" class="form-control" placeholder="temperatura" required/>
+					<td> <p class="form text text-danger" th:if="${#fields.hasErrors('temperatura')}" th:errorclass="error" th:errors="*{temperatura}"/> </td>
 					<label>Humedad: </label>
 					<input type="text" name="humedad" th:field="*{humedad}" class="form-control" placeholder="humedad" required/>
+					<td> <p class="form text text-danger" th:if="${#fields.hasErrors('humedad')}" th:errorclass="error" th:errors="*{humedad}"/> </td>
 				</div>
+				</tr>
 				<div class="form-group">
 					<label>Estado del Clima: </label>
 					<br>

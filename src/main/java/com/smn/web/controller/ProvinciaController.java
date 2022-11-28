@@ -2,9 +2,12 @@ package com.smn.web.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,11 +27,6 @@ public class ProvinciaController {
 		modelo.addAttribute("provincias", servicio.listarProvincias());
 		return "provincias";
 	}
-	
-	@ModelAttribute("allProvincias")
-    public List<Provincia> getAllProvincias() {
-        return this.servicio.listarProvincias();
-    }
 
 	@GetMapping("/provincias/nuevo")
 	public String mostrarFomularioProvincia(Model modelo) {
@@ -37,8 +35,17 @@ public class ProvinciaController {
 		return "crear_provincia";
 	}
 
-	@PostMapping("/provincias/agregar")
-	public String guardarProvincia(@ModelAttribute("provincia") Provincia provincia) {
+	@PostMapping("/provincia/agregar")
+	public String guardarProvincia(@Valid @ModelAttribute("provincia") Provincia provincia, BindingResult result, Model modelo){
+		
+		if(result.hasErrors()) 
+		{
+			modelo.addAttribute("provincia", provincia);
+			System.out.println("Hubo errores");
+			return "crear_provincia";	
+		}
+		
+		provincia.setNombre_provincia(provincia.getNombre_provincia().toUpperCase());
 		servicio.guardarProvincia(provincia);
 		return "redirect:/provincias";
 	}
@@ -50,12 +57,17 @@ public class ProvinciaController {
 	}
 
 	@PostMapping("/provincias/{id}")
-	public String actualizarProvincia(@PathVariable Long id, @ModelAttribute("provincia") Provincia provincia,
-			Model modelo) {
+	public String actualizarProvincia(@Valid @PathVariable Long id, @ModelAttribute("provincia") Provincia provincia, BindingResult result, Model modelo) {
 		Provincia provinciaExistente = servicio.obtenerProvinciaId(id);
-		//provinciaExistente.setId_provincia(id);
+		
+		if(result.hasErrors()) 
+		{
+			modelo.addAttribute("provincia", servicio.obtenerProvinciaId(id));
+			System.out.println("Hubo errores");
+			return "crear_editar";	
+		}
+		
 		provinciaExistente.setNombre_provincia(provincia.getNombre_provincia());
-
 		servicio.actualizarProvincia(provinciaExistente);
 		return "redirect:/provincias";
 	}
@@ -65,5 +77,10 @@ public class ProvinciaController {
 		servicio.eliminarProvincia(id);
 		return "redirect:/provincias";
 	}
+	
+	@ModelAttribute("allProvincias")
+    public List<Provincia> getAllProvincias() {
+        return this.servicio.listarProvincias();
+    }
 	
 }

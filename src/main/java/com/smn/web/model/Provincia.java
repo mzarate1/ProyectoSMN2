@@ -6,6 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "provincia")
@@ -15,6 +19,7 @@ public class Provincia {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_provincia;
 	
+	@Size(min = 4, max = 10, message = "Nombre Provincia, debe tener entre 4 a 10 caracteres")
 	@Column(name = "nombre_provincia", nullable = false, length = 20)
 	private String nombre_provincia;
 	

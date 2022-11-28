@@ -10,7 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "clima")
@@ -20,15 +24,17 @@ public class Clima {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_clima;
 	
-	@NotNull
+	@FutureOrPresent(message = "Fecha solo puede ser el presente o futuro")
 	@Column(name = "fecha", nullable = false)
 	private Date fecha;
 	
-	@NotNull
+	@PositiveOrZero(message = "Temperatura debe estar entre 0° a 60°")
+	@Max(60)
 	@Column(name = "temperatura", nullable = false)
 	private int temperatura;
-	
-	@NotNull
+
+	@PositiveOrZero(message = "Humedad debe estar entre 0% a 100%")
+	@Max(100)
 	@Column(name = "humedad", nullable = false)
 	private int humedad;
 	

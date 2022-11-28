@@ -67,7 +67,7 @@ public class ProvinciaController {
 			return "crear_editar";	
 		}
 		
-		provinciaExistente.setNombre_provincia(provincia.getNombre_provincia());
+		provinciaExistente.setNombre_provincia(provincia.getNombre_provincia().toUpperCase());
 		servicio.actualizarProvincia(provinciaExistente);
 		return "redirect:/provincias";
 	}

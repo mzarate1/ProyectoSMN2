@@ -26,7 +26,7 @@ public class EventoController {
 	private CiudadServiceImpl servicioCiudad;
 	
 	@GetMapping("/consultar_evento")
-	public String listado_evento(Model modelo) {
+	public String listado_evento (Model modelo) {
 		modelo.addAttribute("listado_evento",servicioEvento.listarEvento());
 		return "consultar_evento";
 	}
@@ -60,7 +60,7 @@ public class EventoController {
 	public String actualizarevento(@PathVariable Long id, @ModelAttribute("evento") Evento evento, Model modelo) {
 		Evento eventoExistente = servicioEvento.obtenerEventoId(id);
 		eventoExistente.setFechaevento(evento.getFechaevento());
-		eventoExistente.setdscEvento(evento.getdscEvento());
+		eventoExistente.setdsc_evento(evento.getdsc_evento());
 		eventoExistente.setId_ciudad(evento.getId_ciudad());
 		return "redirect:/consultar_evento";
 	}

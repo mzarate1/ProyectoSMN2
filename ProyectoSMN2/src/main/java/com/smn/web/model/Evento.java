@@ -22,8 +22,8 @@ public class Evento {
 	@Column(name = "fechaevento", nullable = false)
 	private Date fechaevento;
 		
-	@Column(name = "dscEvento", nullable = false)
-	private String dscEvento;
+	@Column(name = "dsc_evento", nullable = false, length = 150)
+	private String dsc_evento;
 	
 	@JoinColumn(name = "id_ciudad", nullable = false)
 	@ManyToOne()
@@ -33,19 +33,19 @@ public class Evento {
 		super();
 	}
 
-	public Evento(Date fechaEvento, Ciudad id_ciudad, String dscEvento) {
+	public Evento(Date fechaEvento, Ciudad id_ciudad, String dsc_evento) {
 		super();
 		this.fechaevento = fechaEvento;
 		this.id_ciudad = id_ciudad;
-		this.dscEvento = dscEvento;
+		this.dsc_evento = dsc_evento;
 	}
 
-	public Evento(Long id_evento, Date fechaevento, Ciudad id_ciudad, String dscEvento) {
+	public Evento(Long id_evento, Date fechaevento, Ciudad id_ciudad, String dsc_evento) {
 		super();
 		this.id_evento = id_evento;
 		this.fechaevento = fechaevento;
 		this.id_ciudad = id_ciudad;
-		this.dscEvento = dscEvento;
+		this.dsc_evento = dsc_evento;
 	}
 
 	public Long getId_evento() {
@@ -72,17 +72,19 @@ public class Evento {
 		this.id_ciudad = id_ciudad;
 	}
 	
-	public String getdscEvento() {
-		return dscEvento;
+	public String getdsc_evento() {
+		return dsc_evento;
 	}
 
-	public void setdscEvento(String dscEvento) {
-		this.dscEvento = dscEvento;
+	public void setdsc_evento(String dsc_evento) {
+		this.dsc_evento = dsc_evento;
 	}
 
 	@Override
 	public String toString() {
-		return "Evento [=" + id_evento + ", fecha=" + fechaevento + ", dsc evento=" + dscEvento + ", ciudad=" + id_ciudad + "]";
+		return "Evento [id_evento=" + id_evento + ", fechaevento=" + fechaevento + ", dsc_evento=" + dsc_evento
+				+ ", id_ciudad=" + id_ciudad + "]";
 	}
+
 	
 }

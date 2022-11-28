@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf 8">
-	<title>Consultar Clima</title>
+	<title>Consultar Eventos</title>
 	<!-- CSS only -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
@@ -23,33 +23,29 @@
 	
 	<div class="container">
 		<div class="row">
-			<h1>Listado del Clima</h1>
+			<h1>Listado de Eventos</h1>
 		</div>
 	
-	<form  th:action="@{/consultar_clima}" th:object="${listado_clima}" method="post">
+	<form  th:action="@{/consultar_evento}" th:object="${listado_evento}" method="post">
 	</table>
 	<br>
 	<table class="table table-striped table-bordered">
 		<thead>
 			<tr>
 					<th>Fecha</th>
-					<th>Temperatura</th>
-					<th>Humedad</th>
-					<th>Estado del Clima</th>
+					<th>Descripcion</th>
 					<th>Ciudad</th>
 			</tr>
 		</thead>
 			<tbody>
-				<tr th:each="clima : ${listado_clima}">
-					<td th:text="${clima.getFecha()}">Fecha</td>
-					<td th:text="${clima.getTemperatura()}">Temperatura</td>
-					<td th:text="${clima.getHumedad()}">Humedad</td>
-					<td th:text="${clima.getId_estado().getDsc_estado()}">Humedad</td>
-					<td th:text="${clima.getId_ciudad().getNombre_ciudad()}">Humedad</td>
+				<tr th:each="evento : ${listado_evento}">
+					<td th:text="${evento.getFechaevento()}"</td>
+					<td th:text="${evento.getdsc_evento}"</td>
+					<td th:text="${evento.getId_ciudad().getNombre_ciudad()}"</td>
 					
 					<td>
-						<a th:href="@{/consultar_clima/editar/{id}(id=${clima.getId_clima()})}" class="btn btn-info">Editar</a>
-						<a th:href="@{/consultar_clima/{id}(id=${clima.getId_clima()})}" class="btn btn-danger">Eliminar</a>
+						<a th:href="@{/consultar_evento/editar/{id}(id=${evento.getId_evento()})}" class="btn btn-info">Editar</a>
+						<a th:href="@{/consultar_evento/{id}(id=${evento.getId_evento()})}" class="btn btn-danger">Eliminar</a>
 					</td>
 				
 				</tr>

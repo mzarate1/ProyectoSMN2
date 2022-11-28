@@ -1,11 +1,15 @@
 package com.smn.web.model;
 
+
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -23,7 +27,10 @@ public class Ciudad {
 	@JoinColumn(name = "id_provincia", nullable = false)
 	@ManyToOne()
 	private Provincia id_provincia;
-
+	
+	@ManyToMany (mappedBy = "ciudades")
+	private List <Usuarios> createdByUsuarios;
+	
 	public Ciudad() {
 		super();
 	}
@@ -70,5 +77,6 @@ public class Ciudad {
 		return "Ciudad [id_ciudad=" + id_ciudad + ", nombre_ciudad=" + nombre_ciudad + ", id_provincia=" + id_provincia
 				+ "]";
 	}
+	
 	
 }

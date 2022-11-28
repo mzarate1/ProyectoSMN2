@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf 8">
+	<title>Editar Evento</title>
+	<!-- CSS only -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+
+<script>
+    $(document).ready(function(){
+      var date_input=$('input[name="fechaevento"]'); 
+      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+      var options={
+        format: 'yyyy/mm/dd',
+        container: container,
+        todayHighlight: true,
+        autoclose: true,
+      };
+      date_input.datepicker(options);
+    })
+</script>
+
+<body>
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+	<a class="navbar-brand" href="#"></a>
+	<!-- Navbar links-->
+	<div class="collapse navbar-collapse" id="collapsibleNavbar">
+		<ul class="navbar-nav">
+			<li class="nav-item"><a class="nav-link"
+				th:href="@{/consultar_clima}">Volver</a></li>
+		</ul>
+	</div>
+	</nav>
+
+	<br>
+	<div class="container">
+		</div>
+			<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+				<h1 class="text-center">Modificar un Evento Extremo</h1>
+				<div class="card-body"> 
+					<form th:action="@{/consultar_evento/{id}(id=${evento.id_evento})}" th:object="${evento}" method="POST">
+						<div class="form-group">
+							<label>Fecha: </label>
+							<br>
+							<input type="text" id="fechaevento" autocomplete="off" th:field="*{fechaevento}" placeholder="YYYY/MM/DD" />
+							<br>
+							<label>Descripcion: </label>
+							<input type="text" name="dsc_evento" th:field="*{dsc_evento}" class="form-control" placeholder="Evento" required/>
+						</div>
+						
+						<br>
+						<br>
+						<div class="form-group">
+							<label>Ciudad: </label>
+							<select th:field="*{id_ciudad}">
+		         				<option th:each="c : ${allCiudades}" 
+				          				th:value="${c.id_ciudad}" 
+				          				th:text="${c.nombre_ciudad}"></option>
+							</select>
+						</div>
+						<br>
+						<div class="box-footer">
+							<button class="btn btn-success">Guardar</button>
+						</div>
+						
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

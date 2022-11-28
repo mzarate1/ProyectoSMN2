@@ -7,7 +7,7 @@ import com.smn.web.model.Clima;
 public interface ClimaService {
 	
 	public List<Clima> listarClimas();
-	
+		
 	public Clima guardarClima(Clima clima);
 	
 	public Clima obtenerClimaId(Long id);

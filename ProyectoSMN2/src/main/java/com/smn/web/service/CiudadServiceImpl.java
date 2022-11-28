@@ -18,12 +18,8 @@ public class CiudadServiceImpl implements CiudadService{
 	public List<Ciudad> listarCiudades() {
 		return repositorio.findAll();
 	}
-
-	@Override
-	public Ciudad guardarCiudad(Ciudad ciudad) {
-		return repositorio.save(ciudad);
-	}
-
+		
+	
 	@Override
 	public Ciudad obtenerCiudadId(Long id) {
 		return repositorio.findById(id).get();
@@ -37,6 +33,12 @@ public class CiudadServiceImpl implements CiudadService{
 	@Override
 	public void eliminarCiudad(Ciudad ciudad) {
 		repositorio.delete(ciudad);
+	}
+
+
+	@Override
+	public Ciudad guardarCiudad(Ciudad ciudad) {
+		return repositorio.save(ciudad);
 	}
 
 }

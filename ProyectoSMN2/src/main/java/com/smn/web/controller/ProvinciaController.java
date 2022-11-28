@@ -22,7 +22,7 @@ public class ProvinciaController {
 	@GetMapping("/provincias")
 	public String listarProvincias(Model modelo) {
 		modelo.addAttribute("provincias", servicio.listarProvincias());
-		return "provincias"; // nos retorna el archivo provincias
+		return "provincias"; 
 	}
 
 	@GetMapping("/provincias/nuevo")
@@ -33,7 +33,7 @@ public class ProvinciaController {
 	}
 
 	@PostMapping("/provincias")
-	public String guardarProvincia(@ModelAttribute("provincia") Provincia provincia) {
+	public String guardarProvincia(@ModelAttribute("provincia") Provincia provincia){
 		servicio.guardarProvincia(provincia);
 		return "redirect:/provincias";
 	}

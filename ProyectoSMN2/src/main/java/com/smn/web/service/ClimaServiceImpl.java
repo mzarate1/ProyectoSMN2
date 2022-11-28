@@ -18,6 +18,7 @@ public class ClimaServiceImpl implements ClimaService{
 	public List<Clima> listarClimas() {
 		return repositorio.findAll();
 	}
+	
 
 	@Override
 	public Clima guardarClima(Clima clima) {

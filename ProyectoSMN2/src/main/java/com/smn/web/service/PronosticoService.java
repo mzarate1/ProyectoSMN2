@@ -16,4 +16,6 @@ public interface PronosticoService {
 	public Pronostico actualizarPronostico(Pronostico pronostico);
 	
 	public void eliminarPronostico(Pronostico pronostico);
+
+	public List<Pronostico> listarCiudadPronostico(Long IdCiudadSeleccionada);
 }

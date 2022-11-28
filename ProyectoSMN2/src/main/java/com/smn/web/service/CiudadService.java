@@ -7,7 +7,7 @@ import com.smn.web.model.Ciudad;
 public interface CiudadService {
 	
 	public List<Ciudad> listarCiudades();
-	
+
 	public Ciudad guardarCiudad(Ciudad ciudad);
 	
 	public Ciudad obtenerCiudadId(Long id);

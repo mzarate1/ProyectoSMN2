@@ -19,6 +19,11 @@ public class PronosticoServiceImpl implements PronosticoService {
 	public List<Pronostico> listarPronosticos() {
 		return repositorio.findAll();
 	}
+	
+	@Override
+	public List <Pronostico> listarCiudadPronostico(Long IdCiudadSeleccionada) {
+		return repositorio.findByIdCiudad(IdCiudadSeleccionada);
+	}
 
 	@Override
 	public Pronostico guardarPronostico(Pronostico pronostico) {

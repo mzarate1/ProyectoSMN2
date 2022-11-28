@@ -18,7 +18,7 @@ import com.smn.web.service.ClimaServiceImpl;
 import com.smn.web.service.EstadoClimaServiceImpl;
 
 @Controller
-public class ConsutaClimaController {
+public class ClimaController {
 	
 	@Autowired
 	private ClimaServiceImpl servicioClima;
@@ -34,7 +34,7 @@ public class ConsutaClimaController {
 		modelo.addAttribute("listado_clima", servicioClima.listarClimas());
 		return "consultar_clima";
 	}
-	
+			
 	@ModelAttribute("allEstadoClimas")
 	public List<EstadoClima> getAllEstadoClimas() {
         return this.servicioEstadoClima.listarEstadoClima();

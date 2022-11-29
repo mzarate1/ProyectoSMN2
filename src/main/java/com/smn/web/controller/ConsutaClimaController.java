@@ -76,13 +76,24 @@ public class ConsutaClimaController {
 	}
 
 	@PostMapping("/consultar_clima/{id}")
-	public String actualizarClima(@PathVariable Long id, @ModelAttribute("clima") Clima clima, Model modelo) {
+	public String actualizarClima(@Valid @PathVariable Long id, @ModelAttribute("clima") Clima clima, BindingResult result, Model modelo) {
 		Clima climaExistente = servicioClima.obtenerClimaId(id);
+		
+		if(result.hasErrors()) 
+		{
+			modelo.addAttribute("clima", servicioClima.obtenerClimaId(id));
+			System.out.println("Hubo errores");
+			return "editar_clima";	
+		}
+		
 		climaExistente.setFecha(clima.getFecha());
 		climaExistente.setTemperatura(clima.getTemperatura());
 		climaExistente.setHumedad(clima.getHumedad());
 		climaExistente.setId_estado(clima.getId_estado());
 		climaExistente.setId_ciudad(clima.getId_ciudad());
+		
+		servicioClima.actualizarClima(climaExistente);
+		
 		return "redirect:/consultar_clima";
 	}
 

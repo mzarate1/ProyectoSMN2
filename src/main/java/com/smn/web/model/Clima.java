@@ -16,6 +16,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 import javax.validation.constraints.Size;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "clima")
 public class Clima {
@@ -24,6 +26,7 @@ public class Clima {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_clima;
 	
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	@FutureOrPresent(message = "Fecha solo puede ser el presente o futuro")
 	@Column(name = "fecha", nullable = false)
 	private Date fecha;

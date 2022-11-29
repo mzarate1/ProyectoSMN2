@@ -46,11 +46,14 @@
 							<label>Fecha: </label>
 							<br>
 							<input type="text" id="fecha" autocomplete="off" th:field="*{fecha}" placeholder="YYYY/MM/DD" />
+							<td> <p class="form text text-danger" th:if="${#fields.hasErrors('fecha')}" th:errorclass="error" th:errors="*{fecha}"/> </td>
 							<br>
 							<label>Temperatura: </label>
 							<input type="text" name="temperatura" th:field="*{temperatura}" class="form-control" placeholder="temperatura" required/>
+							<td> <p class="form text text-danger" th:if="${#fields.hasErrors('temperatura')}" th:errorclass="error" th:errors="*{temperatura}"/> </td>
 							<label>Humedad: </label>
 							<input type="text" name="humedad" th:field="*{humedad}" class="form-control" placeholder="humedad" required/>
+							<td> <p class="form text text-danger" th:if="${#fields.hasErrors('humedad')}" th:errorclass="error" th:errors="*{humedad}"/> </td>
 						</div>
 						
 						<br>

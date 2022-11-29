@@ -84,6 +84,7 @@ public class CiudadController {
 		
 		ciudadExistente.setNombre_ciudad(ciudad.getNombre_ciudad().toLowerCase());
 		ciudadExistente.setId_provincia(ciudad.getId_provincia());
+		
 		servicio.actualizarCiudad(ciudadExistente);
 		return "redirect:/ciudades";
 	}

@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.smn.web.controller.PronosticoBuscarForm;
+import com.smn.web.excepciones.Excepcion;
 import com.smn.web.model.Pronostico;
 import com.smn.web.repository.PronosticoRepository;
-import com.tsti.smn.excepciones.Excepcion;
 
 
 @Service
@@ -41,6 +41,7 @@ public class PronosticoServiceImpl implements PronosticoService {
 	public void eliminarPronostico(Pronostico pronostico) {
 		repositorio.delete(pronostico);
 	}
+	
 	@Override
 	public List<Pronostico> filter(PronosticoBuscarForm filter) throws Exception {
 		if( filter.getIdCiudadSeleccionada()==null)

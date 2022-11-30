@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title><span th:text="#{persona.buscar.titulo}"></span></title>
+    <title><span th:text="Pronostico Extendido"></span></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" th:href="@{/css/main.css}"/>
 </head>
@@ -10,7 +10,7 @@
 	<div class="starter-template">
         <h1>Pronostico extendido</h1>
     </div>
-	<form  th:action="@{/PronosticoBuscar}" th:object="${formBean}" method="post">
+	<form  th:action="@{/pronosticoBuscar}" th:object="${formBean}" method="post">
 		<p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
 		<div class="form-group">
 					<label>Seleccione una Ciudad</label>

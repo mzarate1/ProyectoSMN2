@@ -1,4 +1,4 @@
-package com.tsti.smn.excepciones;
+package com.smn.web.excepciones;
 
 public class Excepcion extends Exception{
 

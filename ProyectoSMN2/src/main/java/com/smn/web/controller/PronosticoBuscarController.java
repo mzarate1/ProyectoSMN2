@@ -22,31 +22,26 @@ import com.smn.web.service.CiudadService;
 import com.smn.web.service.PronosticoService;
 
 @Controller
-@RequestMapping("/PronosticoBuscar")
+@RequestMapping("/pronosticoBuscar")
 public class PronosticoBuscarController {
 	@Autowired
     private PronosticoService servicio;
 	@Autowired
     private CiudadService servicioCiudad;
 	
-	public static Date sumarDiasAFecha(Date fecha, int dias){
-	      if (dias==0) return fecha;
-	      Calendar calendar = Calendar.getInstance();
-	      calendar.setTime(fecha); 
-	      calendar.add(Calendar.DAY_OF_YEAR, dias);  
-	      return calendar.getTime(); 
-	}
-     
+	
     @RequestMapping(method=RequestMethod.GET)
     public String preparaForm(Model modelo) {
     	PronosticoBuscarForm form =  new PronosticoBuscarForm();
     	form.setIdCiudadSeleccionada(1L);
-    	java.util.Date fecha = new Date();
-    	form.setFechaactual(fecha);
-    	java.util.Date fecha2 = sumarDiasAFecha(fecha,10);
-    	form.setFechaextendida(fecha2);
-       modelo.addAttribute("formBean",form);
-       return "PronosticoBuscar";
+    	Date fechaactual = new Date();
+    	form.setFechaactual(fechaactual);
+    	Calendar calendar = Calendar.getInstance();
+	 	calendar.setTime(fechaactual); 
+	 	calendar.add(Calendar.DAY_OF_YEAR, 10);  
+	 	form.setFechaextendida(calendar.getTime()); 
+    	modelo.addAttribute("formBean",form);
+    return "pronosticoBuscar";
     }
      
     
@@ -69,7 +64,7 @@ public class PronosticoBuscarController {
 	            result.addError(error);
 			}
         	modelo.addAttribute("formBean",formBean);
-        	return "PronosticoBuscar";
+        	return "pronosticoBuscar";
     	}
     
     	

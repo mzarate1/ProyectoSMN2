@@ -22,53 +22,52 @@ import com.smn.web.service.EstadoClimaServiceImpl;
 
 @Controller
 public class ConsutaClimaController {
-	
+
 	@Autowired
 	private ClimaServiceImpl servicioClima;
-	
+
 	@Autowired
 	private EstadoClimaServiceImpl servicioEstadoClima;
-	
+
 	@Autowired
 	private CiudadServiceImpl servicioCiudad;
-	
+
 	@GetMapping("/consultar_clima")
 	public String listado_clima(Model modelo) {
 		modelo.addAttribute("listado_clima", servicioClima.listarClimas());
 		return "consultar_clima";
 	}
-	
+
 	@ModelAttribute("allEstadoClimas")
 	public List<EstadoClima> getAllEstadoClimas() {
-        return this.servicioEstadoClima.listarEstadoClima();
-    }
-	
+		return this.servicioEstadoClima.listarEstadoClima();
+	}
+
 	@ModelAttribute("allCiudades")
-    public List<Ciudad> getAllCiudades() {
-        return this.servicioCiudad.listarCiudades();
-    }
-	
+	public List<Ciudad> getAllCiudades() {
+		return this.servicioCiudad.listarCiudades();
+	}
+
 	@GetMapping("/clima/nuevo")
 	public String mostrarFomularioClima(Model modelo) {
-		Clima clima = new Clima ();
+		Clima clima = new Clima();
 		modelo.addAttribute("clima", clima);
 		return "crear_clima";
 	}
-	
+
 	@PostMapping("/clima/agregar")
 	public String guardarCiudad(@Valid @ModelAttribute("clima") Clima clima, BindingResult result, Model modelo) {
-		
-		if(result.hasErrors()) 
-		{
+
+		if (result.hasErrors()) {
 			modelo.addAttribute("clima", clima);
 			System.out.println("Hubo errores");
-			return "crear_clima";	
+			return "crear_clima";
 		}
-		
+
 		servicioClima.guardarClima(clima);
 		return "redirect:/consultar_clima";
 	}
-	
+
 	@GetMapping("/consultar_clima/editar/{id}")
 	public String mostrarFormularioEditar(@PathVariable Long id, Model modelo) {
 		modelo.addAttribute("clima", servicioClima.obtenerClimaId(id));
@@ -78,22 +77,22 @@ public class ConsutaClimaController {
 	@PostMapping("/consultar_clima/{id}")
 	public String actualizarClima(@PathVariable Long id, @Valid @ModelAttribute("clima") Clima clima, BindingResult result, Model modelo) {
 		Clima climaExistente = servicioClima.obtenerClimaId(id);
-		
-		if(result.hasErrors()) 
-		{
-			modelo.addAttribute("clima", servicioClima.obtenerClimaId(id));
+
+		if (result.hasErrors()) {
+			// modelo.addAttribute("clima", clima);
+			modelo.addAttribute("clima", climaExistente);
 			System.out.println("Hubo errores");
-			return "editar_clima";	
+			return "editar_clima";
 		}
-		
+
 		climaExistente.setFecha(clima.getFecha());
 		climaExistente.setTemperatura(clima.getTemperatura());
 		climaExistente.setHumedad(clima.getHumedad());
 		climaExistente.setId_estado(clima.getId_estado());
 		climaExistente.setId_ciudad(clima.getId_ciudad());
-		
+
 		servicioClima.actualizarClima(climaExistente);
-		
+
 		return "redirect:/consultar_clima";
 	}
 
@@ -103,5 +102,5 @@ public class ConsutaClimaController {
 		servicioClima.eliminarClima(climaExistente);
 		return "redirect:/consultar_clima";
 	}
-	
+
 }

@@ -22,7 +22,7 @@ public class CiudadController {
 
 	@Autowired
 	private CiudadServiceImpl servicio;
-	
+
 	@Autowired
 	private ProvinciaServiceImpl servicioProvincia;
 
@@ -31,40 +31,38 @@ public class CiudadController {
 		modelo.addAttribute("ciudades", servicio.listarCiudades());
 		return "ciudades";
 	}
-	
+
 	@ModelAttribute("allCiudades")
-    public List<Ciudad> getAllCiudades() {
-        return this.servicio.listarCiudades();
-    }
-	
+	public List<Ciudad> getAllCiudades() {
+		return this.servicio.listarCiudades();
+	}
+
 	@ModelAttribute("allProvincias")
-    public List<Provincia> getAllProvincias() {
-        return this.servicioProvincia.listarProvincias();
-    }
-		
+	public List<Provincia> getAllProvincias() {
+		return this.servicioProvincia.listarProvincias();
+	}
+
 	@GetMapping("/ciudad/nuevo")
 	public String mostrarFomularioCiudad(Model modelo) {
-		Ciudad ciudad = new Ciudad ();
+		Ciudad ciudad = new Ciudad();
 		modelo.addAttribute("ciudad", ciudad);
 		return "crear_ciudad";
 	}
-	
+
 	@PostMapping("/ciudad/agregar")
 	public String guardarCiudad(@Valid @ModelAttribute("ciudad") Ciudad ciudad, BindingResult result, Model modelo) {
-		
-		if(result.hasErrors()) 
-		{
+
+		if (result.hasErrors()) {
 			modelo.addAttribute("ciudad", ciudad);
 			System.out.println("Hubo errores");
-			return "crear_ciudad";	
+			return "crear_ciudad";
 		}
-		
+
 		ciudad.setNombre_ciudad(ciudad.getNombre_ciudad().toLowerCase());
 		servicio.guardarCiudad(ciudad);
 		return "redirect:/ciudades";
 	}
-	
-	
+
 	@GetMapping("/ciudades/editar/{id}")
 	public String mostrarFormularioEditar(@PathVariable Long id, Model modelo) {
 		modelo.addAttribute("ciudad", servicio.obtenerCiudadId(id));
@@ -74,17 +72,16 @@ public class CiudadController {
 	@PostMapping("/ciudades/{id}")
 	public String actualizarCiudad(@PathVariable Long id, @Valid @ModelAttribute("ciudad") Ciudad ciudad, BindingResult result, Model modelo) {
 		Ciudad ciudadExistente = servicio.obtenerCiudadId(id);
-		
-		if(result.hasErrors()) 
-		{
-			modelo.addAttribute("ciudad", servicio.obtenerCiudadId(id));
+
+		if (result.hasErrors()) {
+			modelo.addAttribute("ciudad", ciudadExistente);
 			System.out.println("Hubo errores");
-			return "editar_ciudad";	
+			return "editar_ciudad";
 		}
-		
+
 		ciudadExistente.setNombre_ciudad(ciudad.getNombre_ciudad().toLowerCase());
 		ciudadExistente.setId_provincia(ciudad.getId_provincia());
-		
+
 		servicio.actualizarCiudad(ciudadExistente);
 		return "redirect:/ciudades";
 	}
@@ -95,5 +92,5 @@ public class CiudadController {
 		servicio.eliminarCiudad(ciudadExistente);
 		return "redirect:/ciudades";
 	}
-	
+
 }

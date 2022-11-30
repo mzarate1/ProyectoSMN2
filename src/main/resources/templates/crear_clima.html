@@ -41,7 +41,7 @@
 			<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
 				<h1 class="text-center">Nuevo Registro del Clima</h1>
 			<div class="card-body">
-			<form  th:action="@{/clima/agregar}" th:object="${clima}" method="POST">
+			<form  th:action="@{/clima/agregar}" th:object="${climaForm}" method="POST">
 				<tr>
 				<div class="form-group">
 					<label>Fecha: </label>
@@ -62,21 +62,22 @@
 					<label>Estado del Clima: </label>
 					<br>
 					<select th:field="*{id_estado}">
-					<!--<option value={"null"} text="opcion"></option>-->
 		         		<option th:each="ec : ${allEstadoClimas}" 
 				          	th:value="${ec.id_estado}" 
 				          	th:text="${ec.dsc_estado}"></option>
 					</select>
+				<td> <p class="form text text-danger" th:if="${#fields.hasErrors('id_estado')}" th:errorclass="error" th:errors="*{id_estado}"/> </td>
 				</div>
 				<div class="form-group">
 					<label>Ciudad: </label>
 					<br>
 					<select th:field="*{id_ciudad}">
-					<!--<option value={"null"} text="opcion"></option>-->
+					<option value="{null}" text="opcion"></option>
 		         		<option th:each="c : ${allCiudades}" 
 				          	th:value="${c.id_ciudad}" 
 				          	th:text="${c.nombre_ciudad}"></option>
 					</select>
+				<td> <p class="form text text-danger" th:if="${#fields.hasErrors('id_ciudad')}" th:errorclass="error" th:errors="*{id_ciudad}"/> </td>
 				</div>
 				<br>
                 <div class="box-footer">

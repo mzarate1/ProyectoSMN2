@@ -50,47 +50,48 @@ public class ConsutaClimaController {
 
 	@GetMapping("/clima/nuevo")
 	public String mostrarFomularioClima(Model modelo) {
-		Clima clima = new Clima();
-		modelo.addAttribute("clima", clima);
-		return "crear_clima";
+		ClimaForm climaForm = new ClimaForm();
+		modelo.addAttribute("climaForm", climaForm);
+		return "crear_clima"; 
 	}
 
 	@PostMapping("/clima/agregar")
-	public String guardarCiudad(@Valid @ModelAttribute("clima") Clima clima, BindingResult result, Model modelo) {
+	public String guardarCiudad(@Valid @ModelAttribute("climaForm") ClimaForm climaForm, BindingResult result, Model modelo) {
 
 		if (result.hasErrors()) {
-			modelo.addAttribute("clima", clima);
+			modelo.addAttribute("climaForm", climaForm);
 			System.out.println("Hubo errores");
 			return "crear_clima";
 		}
-
+		
+		Clima clima = climaForm.toModel();
 		servicioClima.guardarClima(clima);
+		
 		return "redirect:/consultar_clima";
 	}
 
 	@GetMapping("/consultar_clima/editar/{id}")
 	public String mostrarFormularioEditar(@PathVariable Long id, Model modelo) {
-		modelo.addAttribute("clima", servicioClima.obtenerClimaId(id));
+		modelo.addAttribute("climaForm", servicioClima.obtenerClimaId(id));
 		return "editar_clima";
 	}
 
 	@PostMapping("/consultar_clima/{id}")
-	public String actualizarClima(@PathVariable Long id, @Valid @ModelAttribute("clima") Clima clima, BindingResult result, Model modelo) {
+	public String actualizarClima(@PathVariable Long id, @Valid @ModelAttribute("climaForm") ClimaForm climaForm, BindingResult result, Model modelo) {
 		Clima climaExistente = servicioClima.obtenerClimaId(id);
 
 		if (result.hasErrors()) {
-			// modelo.addAttribute("clima", clima);
-			modelo.addAttribute("clima", climaExistente);
+			// modelo.addAttribute("clima",  clima); Valida con mensajes pero luego aparece un Error de metodo incompatible 
+			modelo.addAttribute("climaForm", climaExistente);
 			System.out.println("Hubo errores");
 			return "editar_clima";
 		}
 
-		climaExistente.setFecha(clima.getFecha());
-		climaExistente.setTemperatura(clima.getTemperatura());
-		climaExistente.setHumedad(clima.getHumedad());
-		climaExistente.setId_estado(clima.getId_estado());
-		climaExistente.setId_ciudad(clima.getId_ciudad());
-
+		climaExistente.setFecha(climaForm.getFecha());
+		climaExistente.setTemperatura(climaForm.getTemperatura());
+		climaExistente.setHumedad(climaForm.getHumedad());
+		climaExistente.setId_estado(climaForm.getId_estado());
+		climaExistente.setId_ciudad(climaForm.getId_ciudad());
 		servicioClima.actualizarClima(climaExistente);
 
 		return "redirect:/consultar_clima";

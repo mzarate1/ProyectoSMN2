@@ -27,11 +27,11 @@
 			<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
 				<h1 class="text-center">Modificar Ciudad</h1>
 				<div class="card-body">
-					<form th:action="@{/ciudades/{id}(id=${ciudad.id_ciudad})}" th:object="${ciudad}" method="POST">
+					<form th:action="@{/ciudades/{id}(id=${ciudadForm.id_ciudad})}" th:object="${ciudadForm}" method="POST">
 						<div class="form-group">
 							<label>Nombre: </label>
 							<input type="text" name="nombre_ciudad" th:field="*{nombre_ciudad}" class="form-control" placeholder="nombre de la ciudad" required>
-							<td> <p class="form text text-danger" th:if="${#fields.hasErrors('nombre_ciudad')}" th:errorclass="error" th:errors="*{nombre_ciudad}"/> </td>
+						<td> <p class="form text text-danger" th:if="${#fields.hasErrors('nombre_ciudad')}" th:errorclass="error" th:errors="*{nombre_ciudad}"/></td>
 						</div>
 						<br>
 						<div class="form-group">

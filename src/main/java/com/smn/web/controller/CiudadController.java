@@ -44,44 +44,43 @@ public class CiudadController {
 
 	@GetMapping("/ciudad/nuevo")
 	public String mostrarFomularioCiudad(Model modelo) {
-		Ciudad ciudad = new Ciudad();
-		modelo.addAttribute("ciudad", ciudad);
+		CiudadForm ciudadForm = new CiudadForm();
+		modelo.addAttribute("ciudadForm", ciudadForm);
 		return "crear_ciudad";
 	}
 
 	@PostMapping("/ciudad/agregar")
-	public String guardarCiudad(@Valid @ModelAttribute("ciudad") Ciudad ciudad, BindingResult result, Model modelo) {
+	public String guardarCiudad(@Valid @ModelAttribute("ciudadForm") CiudadForm ciudadForm, BindingResult result, Model modelo) {
 
 		if (result.hasErrors()) {
-			modelo.addAttribute("ciudad", ciudad);
+			modelo.addAttribute("ciudadForm", ciudadForm);
 			System.out.println("Hubo errores");
 			return "crear_ciudad";
 		}
-
-		ciudad.setNombre_ciudad(ciudad.getNombre_ciudad().toLowerCase());
+		//ciudad.setNombre_ciudad(ciudad.getNombre_ciudad().toLowerCase());
+		Ciudad ciudad = ciudadForm.toModel(); 
 		servicio.guardarCiudad(ciudad);
 		return "redirect:/ciudades";
 	}
 
 	@GetMapping("/ciudades/editar/{id}")
 	public String mostrarFormularioEditar(@PathVariable Long id, Model modelo) {
-		modelo.addAttribute("ciudad", servicio.obtenerCiudadId(id));
+		modelo.addAttribute("ciudadForm", servicio.obtenerCiudadId(id));
 		return "editar_ciudad";
 	}
 
 	@PostMapping("/ciudades/{id}")
-	public String actualizarCiudad(@PathVariable Long id, @Valid @ModelAttribute("ciudad") Ciudad ciudad, BindingResult result, Model modelo) {
+	public String actualizarCiudad(@PathVariable Long id, @Valid @ModelAttribute("ciudadForm") CiudadForm ciudadForm, BindingResult result, Model modelo) {
 		Ciudad ciudadExistente = servicio.obtenerCiudadId(id);
 
 		if (result.hasErrors()) {
-			modelo.addAttribute("ciudad", ciudadExistente);
+			modelo.addAttribute("ciudadForm", ciudadExistente);
 			System.out.println("Hubo errores");
 			return "editar_ciudad";
 		}
 
-		ciudadExistente.setNombre_ciudad(ciudad.getNombre_ciudad().toLowerCase());
-		ciudadExistente.setId_provincia(ciudad.getId_provincia());
-
+		ciudadExistente.setNombre_ciudad(ciudadForm.getNombre_ciudad());
+		ciudadExistente.setId_provincia(ciudadForm.getId_provincia());
 		servicio.actualizarCiudad(ciudadExistente);
 		return "redirect:/ciudades";
 	}

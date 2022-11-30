@@ -41,7 +41,7 @@
 			<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
 				<h1 class="text-center">Modificar un Registro del Clima</h1>
 				<div class="card-body"> 
-					<form th:action="@{/consultar_clima/{id}(id=${clima.id_clima})}" th:object="${clima}" method="POST">
+					<form th:action="@{/consultar_clima/{id}(id=${climaForm.id_clima})}" th:object="${climaForm}" method="POST">
 						<div class="form-group">
 							<label>Fecha: </label>
 							<br>

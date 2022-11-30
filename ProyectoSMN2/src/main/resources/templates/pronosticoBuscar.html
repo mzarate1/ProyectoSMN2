@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title><span th:text="#{persona.buscar.titulo}"></span></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+
+	<div class="starter-template">
+        <h1>Pronostico extendido</h1>
+    </div>
+	<form  th:action="@{/PronosticoBuscar}" th:object="${formBean}" method="post">
+		<p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
+		<div class="form-group">
+					<label>Seleccione una Ciudad</label>
+					<br>
+					<select th:field="*{idCiudadSeleccionada}">
+					    <option th:each="c : ${allCiudades}" 
+					          th:value="${c.id_ciudad}" 
+					          th:text="${c.nombre_ciudad}"></option>
+					</select>
+		</div>
+	  <table class="botones">
+	      <tr>
+		      <td><input type="submit" name="action" value="Buscar" /></td>
+		      <td><input type="submit" name="action" value="Cancelar" /></td>
+		       <td><input type="submit" name="action" value="Evento" /></td>
+	      </tr>
+	        
+	    </table>
+	    
+	    
+	    <table  class="resultados" border="0" style="align-self: center;">
+		    <thead>
+		      <tr>
+		        	<th>Fecha</th>
+					<th>Probabilidad de Lluvia</th>
+					<th>Cantidad de LLuvia</th>
+					<th>Descripcion del Pronostico</th>
+					<th>Ciudad</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr th:each="p : ${resultados}">
+				    <td th:text="${{p.fechapronostico}}"></td>
+			        <td th:text="${{p.probabilidadLluvia}}"></td>
+			        <td th:text="${{p.cantLluvia}}"></td>
+			        <td th:text="${{p.dscPronostico}}" ></td>
+			        <td th:text="${{p.ciudad.nombre}}" ></td>
+			        <td>
+	                    <a th:href="@{/VerEvento}" class="btn btn-primary">
+	                        Evento
+	                    </a>
+	                </td>
+			        
+		      </tr>
+		    </tbody>
+	    </table>
+	</form>
+</body>
+</html>	

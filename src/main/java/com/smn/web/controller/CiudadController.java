@@ -72,7 +72,7 @@ public class CiudadController {
 	}
 
 	@PostMapping("/ciudades/{id}")
-	public String actualizarCiudad(@Valid @PathVariable Long id, @ModelAttribute("ciudad") Ciudad ciudad, BindingResult result, Model modelo) {
+	public String actualizarCiudad(@PathVariable Long id, @Valid @ModelAttribute("ciudad") Ciudad ciudad, BindingResult result, Model modelo) {
 		Ciudad ciudadExistente = servicio.obtenerCiudadId(id);
 		
 		if(result.hasErrors()) 

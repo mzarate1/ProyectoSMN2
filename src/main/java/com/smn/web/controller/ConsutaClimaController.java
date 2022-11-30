@@ -76,7 +76,7 @@ public class ConsutaClimaController {
 	}
 
 	@PostMapping("/consultar_clima/{id}")
-	public String actualizarClima(@Valid @PathVariable Long id, @ModelAttribute("clima") Clima clima, BindingResult result, Model modelo) {
+	public String actualizarClima(@PathVariable Long id, @Valid @ModelAttribute("clima") Clima clima, BindingResult result, Model modelo) {
 		Clima climaExistente = servicioClima.obtenerClimaId(id);
 		
 		if(result.hasErrors()) 

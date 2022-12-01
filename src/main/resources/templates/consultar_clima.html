@@ -59,8 +59,8 @@
 					<td th:text="${clima.getFecha()}">Fecha</td>
 					<td th:text="${clima.getTemperatura()}">Temperatura</td>
 					<td th:text="${clima.getHumedad()}">Humedad</td>
-					<td th:text="${clima.getId_estado().getDsc_estado()}">Humedad</td>
-					<td th:text="${clima.getId_ciudad().getNombre_ciudad()}">Humedad</td>
+					<td th:text="${clima.getEstado().getDsc_estado()}">Humedad</td>
+					<td th:text="${clima.getCiudad().getNombre_ciudad()}">Humedad</td>
 					
 					<td>
 						<a th:href="@{/consultar_clima/editar/{id}(id=${clima.getId_clima()})}" class="btn btn-info">Editar</a>

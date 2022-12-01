@@ -81,17 +81,17 @@ public class ConsutaClimaController {
 		Clima climaExistente = servicioClima.obtenerClimaId(id);
 
 		if (result.hasErrors()) {
-			// modelo.addAttribute("clima",  clima); Valida con mensajes pero luego aparece un Error de metodo incompatible 
+			//modelo.addAttribute("climaForm", climaForm); //Muestra los mensajes pero luego de un Error el metodo POST es incompatible 
 			modelo.addAttribute("climaForm", climaExistente);
 			System.out.println("Hubo errores");
 			return "editar_clima";
-		}
+		}							 
 
 		climaExistente.setFecha(climaForm.getFecha());
 		climaExistente.setTemperatura(climaForm.getTemperatura());
 		climaExistente.setHumedad(climaForm.getHumedad());
-		climaExistente.setId_estado(climaForm.getId_estado());
-		climaExistente.setId_ciudad(climaForm.getId_ciudad());
+		climaExistente.setEstado(climaForm.getEstado());
+		climaExistente.setCiudad(climaForm.getCiudad());
 		servicioClima.actualizarClima(climaExistente);
 
 		return "redirect:/consultar_clima";

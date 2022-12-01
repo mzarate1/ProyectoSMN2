@@ -41,7 +41,7 @@
 			<tbody>
 				<tr th:each="ciudad : ${ciudades}">
 					<td th:text="${ciudad.getNombre_ciudad()}">Nombre de Ciudad</td>
-					<td th:text="${ciudad.getId_provincia().getNombre_provincia()}">Provincia</td>
+					<td th:text="${ciudad.getProvincia().getNombre_provincia()}">Provincia</td>
 					<td>
 						<a th:href="@{/ciudades/editar/{id}(id=${ciudad.getId_ciudad()})}" class="btn btn-info">Editar</a>
 						<a th:href="@{/ciudades/{id}(id=${ciudad.getId_ciudad()})}" class="btn btn-danger">Eliminar</a>

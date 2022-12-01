@@ -14,16 +14,16 @@ public class CiudadForm {
 	private String nombre_ciudad;
 	
 	@NotNull
-	private Provincia id_provincia;
+	private Provincia provincia;
 	
 	public CiudadForm() {
 		super();
 	}
 
-	public CiudadForm(  String nombre_ciudad, Provincia id_provincia) {
+	public CiudadForm(  String nombre_ciudad, Provincia provincia) {
 		super();
 		this.nombre_ciudad = nombre_ciudad;
-		this.id_provincia = id_provincia;
+		this.provincia = provincia;
 		
 	}
 
@@ -43,12 +43,12 @@ public class CiudadForm {
 		this.nombre_ciudad = nombre_ciudad;
 	}
 
-	public Provincia getId_provincia() {
-		return id_provincia;
+	public Provincia getProvincia() {
+		return provincia;
 	}
 
-	public void setId_provincia(Provincia id_provincia) {
-		this.id_provincia = id_provincia;
+	public void setProvincia(Provincia provincia) {
+		this.provincia = provincia;
 	}
 	
 	public Ciudad toModel() {
@@ -56,14 +56,14 @@ public class CiudadForm {
 		Ciudad newCiudad = new Ciudad();
 		newCiudad.setId_ciudad(this.id_ciudad);
 		newCiudad.setNombre_ciudad(this.nombre_ciudad.toLowerCase());
-		newCiudad.setId_provincia(this.id_provincia);
+		newCiudad.setProvincia(this.provincia);
 		return newCiudad;
 	}
 
 	@Override
 	public String toString() {
 		return "CiudadForm [id_ciudad=" + id_ciudad + ", nombre_ciudad=" + nombre_ciudad + ", id_provincia="
-				+ id_provincia + "]";
+				+ provincia + "]";
 	}
 	
 }

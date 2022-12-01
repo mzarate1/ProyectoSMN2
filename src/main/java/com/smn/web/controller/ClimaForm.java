@@ -29,23 +29,23 @@ public class ClimaForm {
 	private int humedad;
 	
 	@NotNull
-	private EstadoClima id_estado;
+	private EstadoClima estado;
 	
 	@NotNull
-	private Ciudad id_ciudad;
+	private Ciudad ciudad;
 	
 	public ClimaForm() {
 		super();
 	}
 
-	public ClimaForm(Long id_clima, Date fecha, int temperatura, int humedad, EstadoClima id_estado, Ciudad id_ciudad) {
+	public ClimaForm(Long id_clima, Date fecha, int temperatura, int humedad, EstadoClima estado, Ciudad ciudad) {
 		super();
 		this.id_clima = id_clima;
 		this.fecha = fecha;
 		this.temperatura = temperatura;
 		this.humedad = humedad;
-		this.id_estado = id_estado;
-		this.id_ciudad = id_ciudad;
+		this.estado = estado;
+		this.ciudad = ciudad;
 	}
 
 	public Long getId_clima() {
@@ -80,20 +80,20 @@ public class ClimaForm {
 		this.humedad = humedad;
 	}
 
-	public EstadoClima getId_estado() {
-		return id_estado;
+	public EstadoClima getEstado() {
+		return estado;
 	}
 
-	public void setId_estado(EstadoClima id_estado) {
-		this.id_estado = id_estado;
+	public void setEstado(EstadoClima estado) {
+		this.estado = estado;
 	}
 
-	public Ciudad getId_ciudad() {
-		return id_ciudad;
+	public Ciudad getCiudad() {
+		return ciudad;
 	}
 
-	public void setId_ciudad(Ciudad id_ciudad) {
-		this.id_ciudad = id_ciudad;
+	public void setCiudad(Ciudad ciudad) {
+		this.ciudad = ciudad;
 	}
 	
 	public Clima toModel() {
@@ -102,8 +102,8 @@ public class ClimaForm {
 		newClima.setFecha(this.fecha);
 		newClima.setTemperatura(this.temperatura);
 		newClima.setHumedad(this.humedad);
-		newClima.setId_estado(this.id_estado);
-		newClima.setId_ciudad(this.id_ciudad);
+		newClima.setEstado(this.estado);
+		newClima.setCiudad(this.ciudad);
 		
 		return newClima;
 	}
@@ -111,7 +111,7 @@ public class ClimaForm {
 	@Override
 	public String toString() {
 		return "ClimaForm [id_clima=" + id_clima + ", fecha=" + fecha + ", temperatura=" + temperatura + ", humedad="
-				+ humedad + ", id_estado=" + id_estado + ", id_ciudad=" + id_ciudad + "]";
+				+ humedad + ", id_estado=" + estado + ", id_ciudad=" + ciudad + "]";
 	}
 	
 }

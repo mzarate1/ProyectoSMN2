@@ -61,23 +61,24 @@
 				<div class="form-group">
 					<label>Estado del Clima: </label>
 					<br>
-					<select th:field="*{id_estado}">
+					<select th:field="*{estado}">
+					<!--<option value="{null}" text="opcion"></option>-->
 		         		<option th:each="ec : ${allEstadoClimas}" 
 				          	th:value="${ec.id_estado}" 
 				          	th:text="${ec.dsc_estado}"></option>
 					</select>
-				<td> <p class="form text text-danger" th:if="${#fields.hasErrors('id_estado')}" th:errorclass="error" th:errors="*{id_estado}"/> </td>
+				<td> <p class="form text text-danger" th:if="${#fields.hasErrors('estado')}" th:errorclass="error" th:errors="*{estado}"/> </td>
 				</div>
 				<div class="form-group">
 					<label>Ciudad: </label>
 					<br>
-					<select th:field="*{id_ciudad}">
-					<option value="{null}" text="opcion"></option>
+					<select th:field="*{ciudad}">
+					<!--<option value="{null}" text="opcion"></option>-->
 		         		<option th:each="c : ${allCiudades}" 
 				          	th:value="${c.id_ciudad}" 
 				          	th:text="${c.nombre_ciudad}"></option>
 					</select>
-				<td> <p class="form text text-danger" th:if="${#fields.hasErrors('id_ciudad')}" th:errorclass="error" th:errors="*{id_ciudad}"/> </td>
+				<td> <p class="form text text-danger" th:if="${#fields.hasErrors('ciudad')}" th:errorclass="error" th:errors="*{ciudad}"/> </td>
 				</div>
 				<br>
                 <div class="box-footer">

@@ -36,11 +36,12 @@
 						<br>
 						<div class="form-group">
 							<label>Provincia: </label>
-							<select th:field="*{id_provincia}">
+							<select th:field="*{provincia}">
 		         				<option th:each="p : ${allProvincias}" 
 				          				th:value="${p.id_provincia}" 
 				          				th:text="${p.nombre_provincia}"></option>
 							</select>
+						<td> <p class="form text text-danger" th:if="${#fields.hasErrors('provincia')}" th:errorclass="error" th:errors="*{provincia}"/> </td>
 						</div>
 						<br>
 						<div class="box-footer">

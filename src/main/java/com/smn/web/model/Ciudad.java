@@ -23,23 +23,23 @@ public class Ciudad {
 	
 	@JoinColumn(name = "id_provincia", nullable = false)
 	@ManyToOne()
-	private Provincia id_provincia;
+	private Provincia provincia;
 
 	public Ciudad() {
 		super();
 	}
 
-	public Ciudad(String nombre_ciudad, Provincia id_provincia) {
+	public Ciudad(String nombre_ciudad, Provincia provincia) {
 		super();
 		this.nombre_ciudad = nombre_ciudad;
-		this.id_provincia = id_provincia;
+		this.provincia = provincia;
 	}
 
-	public Ciudad(Long id_ciudad, String nombre_ciudad, Provincia id_provincia) {
+	public Ciudad(Long id_ciudad, String nombre_ciudad, Provincia provincia) {
 		super();
 		this.id_ciudad = id_ciudad;
 		this.nombre_ciudad = nombre_ciudad;
-		this.id_provincia = id_provincia;
+		this.provincia = provincia;
 	}
 
 	public Long getId_ciudad() {
@@ -58,17 +58,17 @@ public class Ciudad {
 		this.nombre_ciudad = nombre_ciudad;
 	}
 
-	public Provincia getId_provincia() {
-		return id_provincia;
+	public Provincia getProvincia() {
+		return provincia;
 	}
 
-	public void setId_provincia(Provincia id_provincia) {
-		this.id_provincia = id_provincia;
+	public void setProvincia(Provincia provincia) {
+		this.provincia = provincia;
 	}
 
 	@Override
 	public String toString() {
-		return "Ciudad [id_ciudad=" + id_ciudad + ", nombre_ciudad=" + nombre_ciudad + ", id_provincia=" + id_provincia
+		return "Ciudad [id_ciudad=" + id_ciudad + ", nombre_ciudad=" + nombre_ciudad + ", id_provincia=" + provincia
 				+ "]";
 	}
 	

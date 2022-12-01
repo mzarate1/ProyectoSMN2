@@ -10,11 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.FutureOrPresent;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PositiveOrZero;
-import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -27,40 +22,35 @@ public class Clima {
 	private Long id_clima;
 	
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
-	@FutureOrPresent(message = "Fecha solo puede ser el presente o futuro")
 	@Column(name = "fecha", nullable = false)
 	private Date fecha;
 	
-	@PositiveOrZero(message = "Temperatura debe estar entre 0° a 60°")
-	@Max(60)
 	@Column(name = "temperatura", nullable = false)
 	private int temperatura;
 
-	@PositiveOrZero(message = "Humedad debe estar entre 0% a 100%")
-	@Max(100)
 	@Column(name = "humedad", nullable = false)
 	private int humedad;
 	
 	@JoinColumn(name = "id_estado", nullable = false)
 	@ManyToOne()
-	private EstadoClima id_estado;
+	private EstadoClima estado;
 	
 	@JoinColumn(name = "id_ciudad", nullable = false)
 	@ManyToOne()
-	private Ciudad id_ciudad;
+	private Ciudad ciudad;
 
 	public Clima() {
 		super();
 	}
 
-	public Clima(Long id_clima, Date fecha, int temperatura, int humedad, EstadoClima id_estado, Ciudad id_ciudad) {
+	public Clima(Long id_clima, Date fecha, int temperatura, int humedad, EstadoClima estado, Ciudad ciudad) {
 		super();
 		this.id_clima = id_clima;
 		this.fecha = fecha;
 		this.temperatura = temperatura;
 		this.humedad = humedad;
-		this.id_estado = id_estado;
-		this.id_ciudad = id_ciudad;
+		this.estado = estado;
+		this.ciudad = ciudad;
 	}
 
 	public Long getId_clima() {
@@ -95,26 +85,26 @@ public class Clima {
 		this.humedad = humedad;
 	}
 
-	public EstadoClima getId_estado() {
-		return id_estado;
+	public EstadoClima getEstado() {
+		return estado;
 	}
 
-	public void setId_estado(EstadoClima id_estado) {
-		this.id_estado = id_estado;
+	public void setEstado(EstadoClima estado) {
+		this.estado = estado;
 	}
 
-	public Ciudad getId_ciudad() {
-		return id_ciudad;
+	public Ciudad getCiudad() {
+		return ciudad;
 	}
 
-	public void setId_ciudad(Ciudad id_ciudad) {
-		this.id_ciudad = id_ciudad;
+	public void setCiudad(Ciudad ciudad) {
+		this.ciudad = ciudad;
 	}
 
 	@Override
 	public String toString() {
 		return "Clima [id_clima=" + id_clima + ", fecha=" + fecha + ", temperatura=" + temperatura + ", humedad="
-				+ humedad + ", id_estado=" + id_estado + ", id_ciudad=" + id_ciudad + "]";
+				+ humedad + ", id_estado=" + estado + ", id_ciudad=" + ciudad + "]";
 	}
 	
 }

@@ -74,13 +74,14 @@ public class CiudadController {
 		Ciudad ciudadExistente = servicio.obtenerCiudadId(id);
 
 		if (result.hasErrors()) {
+			//modelo.addAttribute("ciudadForm", ciudadForm);
 			modelo.addAttribute("ciudadForm", ciudadExistente);
 			System.out.println("Hubo errores");
 			return "editar_ciudad";
 		}
 
 		ciudadExistente.setNombre_ciudad(ciudadForm.getNombre_ciudad());
-		ciudadExistente.setId_provincia(ciudadForm.getId_provincia());
+		ciudadExistente.setProvincia(ciudadForm.getProvincia());
 		servicio.actualizarCiudad(ciudadExistente);
 		return "redirect:/ciudades";
 	}

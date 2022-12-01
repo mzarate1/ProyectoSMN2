@@ -59,20 +59,22 @@
 						<br>
 						<div class="form-group">
 							<label>Estado del Clima: </label>
-							<select th:field="*{id_estado}">
+							<select th:field="*{estado}">
 		         				<option th:each="ec : ${allEstadoClimas}" 
 				          				th:value="${ec.id_estado}" 
 				          				th:text="${ec.dsc_estado}"></option>
+				        <td> <p class="form text text-danger" th:if="${#fields.hasErrors('estado')}" th:errorclass="error" th:errors="*{estado}"/> </td>
 							</select>
 						</div>
 						<br>
 						<div class="form-group">
 							<label>Ciudad: </label>
-							<select th:field="*{id_ciudad}">
+							<select th:field="*{ciudad}">
 		         				<option th:each="c : ${allCiudades}" 
 				          				th:value="${c.id_ciudad}" 
 				          				th:text="${c.nombre_ciudad}"></option>
 							</select>
+						<td> <p class="form text text-danger" th:if="${#fields.hasErrors('ciudad')}" th:errorclass="error" th:errors="*{ciudad}"/> </td>
 						</div>
 						<br>
 						<div class="box-footer">

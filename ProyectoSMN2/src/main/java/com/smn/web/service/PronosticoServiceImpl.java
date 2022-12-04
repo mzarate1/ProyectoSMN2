@@ -1,5 +1,6 @@
 package com.smn.web.service;
 
+import java.time.LocalDate;
 //import java.time.LocalDate;
 //import java.util.Date;
 //import java.text.SimpleDateFormat;
@@ -25,10 +26,10 @@ public class PronosticoServiceImpl implements PronosticoService {
 	}
 	
 	
-	//@Override
-	//public List<Pronostico> listarPronosticosFecha(LocalDate date) {
-	//	return repositorio.findByFecha(date);
-	//}
+	@Override
+	public List<Pronostico> listarPronosticosFecha(LocalDate date) {
+		return repositorio.findByFecha(date);
+	}
 
 
 	@Override

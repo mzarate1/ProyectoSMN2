@@ -22,6 +22,6 @@ public interface PronosticoService {
 	
 	//public List<Pronostico> filter(PronosticoBuscarForm filter);
 
-	//public List<Pronostico> listarPronosticosFecha(LocalDate date);
+	public List<Pronostico> listarPronosticosFecha(LocalDate date);
 
 }

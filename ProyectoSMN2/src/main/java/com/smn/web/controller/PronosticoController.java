@@ -1,5 +1,6 @@
 package com.smn.web.controller;
 
+import java.time.LocalDate;
 //import java.time.LocalDate;
 import java.util.List;
 
@@ -31,9 +32,9 @@ public class PronosticoController {
 	
 	@GetMapping("/consultar_pronostico")
 	public String listado_pronostico(Model modelo) {
-	modelo.addAttribute("listado_pronostico", servicioPronostico.listarPronosticos());
-		//LocalDate date = LocalDate.now();
-		//modelo.addAttribute("listado_pronostico", servicioPronostico.listarPronosticosFecha(date));
+	//modelo.addAttribute("listado_pronostico", servicioPronostico.listarPronosticos());
+		LocalDate date = LocalDate.now();
+		modelo.addAttribute("listado_pronostico", servicioPronostico.listarPronosticosFecha(date));
 		return "consultar_pronostico";
 	}
 	

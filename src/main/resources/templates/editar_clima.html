@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf 8">
+	<title>Editar Registro del Clima</title>
+	<!-- CSS only -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+
+<script>
+    $(document).ready(function(){
+      var date_input=$('input[name="fecha"]'); 
+      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+      var options={
+        format: 'yyyy/MM/dd',
+        container: container,
+        todayHighlight: true,
+        autoclose: true,
+      };
+      date_input.datepicker(options);
+    })
+</script>
+
+<body>
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+	<a class="navbar-brand" href="#"></a>
+	<!-- Navbar links-->
+	<div class="collapse navbar-collapse" id="collapsibleNavbar">
+		<ul class="navbar-nav">
+			<li class="nav-item"><a class="nav-link"
+				th:href="@{/consultar_clima}">Volver</a></li>
+		</ul>
+	</div>
+	</nav>
+
+	<br>
+	<div class="container">
+		</div>
+			<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+				<h1 class="text-center">Modificar un Registro del Clima</h1>
+				<div class="card-body"> 
+					<form th:action="@{/consultar_clima/{id}(id=${climaForm.id_clima})}" th:object="${climaForm}" method="POST">
+						<div class="form-group">
+							<label>Fecha: </label>
+							<br>
+							<input type="text" id="fecha" autocomplete="off" th:field="*{fecha}" placeholder="yyyy/MM/dd" />
+							<td> <p class="form text text-danger" th:if="${#fields.hasErrors('fecha')}" th:errorclass="error" th:errors="*{fecha}"/> </td>
+							<br>
+							<label>Temperatura: </label>
+							<input type="text" name="temperatura" th:field="*{temperatura}" class="form-control" placeholder="temperatura" required/>
+							<td> <p class="form text text-danger" th:if="${#fields.hasErrors('temperatura')}" th:errorclass="error" th:errors="*{temperatura}"/> </td>
+							<label>Humedad: </label>
+							<input type="text" name="humedad" th:field="*{humedad}" class="form-control" placeholder="humedad" required/>
+							<td> <p class="form text text-danger" th:if="${#fields.hasErrors('humedad')}" th:errorclass="error" th:errors="*{humedad}"/> </td>
+						</div>
+						
+						<br>
+						<div class="form-group">
+							<label>Estado del Clima: </label>
+							<select th:field="*{estado}">
+		         				<option th:each="ec : ${allEstadoClimas}" 
+				          				th:value="${ec.id_estado}" 
+				          				th:text="${ec.dsc_estado}"></option>
+				        <td> <p class="form text text-danger" th:if="${#fields.hasErrors('estado')}" th:errorclass="error" th:errors="*{estado}"/> </td>
+							</select>
+						</div>
+						<br>
+						<div class="form-group">
+							<label>Ciudad: </label>
+							<select th:field="*{ciudad}">
+		         				<option th:each="c : ${allCiudades}" 
+				          				th:value="${c.id_ciudad}" 
+				          				th:text="${c.nombre_ciudad}"></option>
+							</select>
+						<td> <p class="form text text-danger" th:if="${#fields.hasErrors('ciudad')}" th:errorclass="error" th:errors="*{ciudad}"/> </td>
+						</div>
+						<br>
+						<div class="box-footer">
+							<button class="btn btn-success">Guardar</button>
+						</div>
+						
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

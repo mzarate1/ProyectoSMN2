@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf 8">
+	<title>Listado de Provincias</title>
+	<!-- CSS only -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+	<a class="navbar-brand" href="#"></a>
+	<!-- Navbar links-->
+	<div class="collapse navbar-collapse" id="collapsibleNavbar">
+		<ul class="navbar-nav">
+		<li class="nav-item"><a class="nav-link"
+				th:href="@{/}">Volver</a></li>
+		</ul>
+	</div>
+	</nav>
+	
+	<div class="container">
+		<div class="row">
+			<h1>Listado de Provincias</h1>
+		</div>
+		<div class="row">
+			<div class="col-lg-3">
+				<a th:href="@{/provincias/nuevo}" class="btn btn-primary btn-sm mb3">Agregar Provincia</a>
+		</div>
+		<br>
+		<br>
+		<table class="table table-striped table-bordered">
+			<thead>
+				<tr>
+					<th>Nombre</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="provincia : ${provincias}">
+					<td th:text="${provincia.getNombre_provincia()}">Nombre</td>
+					<td>
+						<a th:href="@{/provincias/editar/{id}(id=${provincia.getId_provincia()})}" class="btn btn-info">Editar</a>
+						<a th:href="@{/provincias/{id}(id=${provincia.getId_provincia()})}" class="btn btn-danger">Eliminar</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</body>
+
+</html>

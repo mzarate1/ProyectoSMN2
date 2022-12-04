@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf 8">
+	<title>Consultar Clima</title>
+	<!-- CSS only -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+	<a class="navbar-brand" href="#"></a>
+	<!-- Navbar links-->
+	<div class="collapse navbar-collapse" id="collapsibleNavbar">
+		<ul class="navbar-nav">
+			<li class="nav-item"><a class="nav-link"
+				th:href="@{/}">Volver</a></li>
+		</ul>
+	</div>
+	</nav>
+	
+	<div class="container">
+		<div class="row">
+			<h1>Listado del Clima</h1>
+		</div>
+	
+	<form  th:action="@{/consultar_clima}" th:object="${listado_clima}" method="post">
+	<!--
+	<div class="form-group">
+			<label>Elija una Ciudad: </label>
+			<select th:field="*{id_ciudad}">
+				<option th:value="null" text="Seleccione una opción"></option>
+				<option th:each="c : ${allCiudades}" 
+					 th:value="${c.id_ciudad}" 
+					 th:text="${c.nombre_ciudad}"></option>
+			</select>
+
+	<table class="botones">
+		<tr>
+			<td><input type="submit" name="action" value="Buscar" /></td>
+		</tr>
+		-->
+	</table>
+	<br>
+	<table class="table table-striped table-bordered">
+		<thead>
+			<tr>
+					<th>Fecha</th>
+					<th>Temperatura</th>
+					<th>Humedad</th>
+					<th>Estado del Clima</th>
+					<th>Ciudad</th>
+			</tr>
+		</thead>
+			<tbody>
+				<tr th:each="clima : ${listado_clima}">
+					<td th:text="${clima.getFecha()}">Fecha</td>
+					<td th:text="${clima.getTemperatura()}">Temperatura</td>
+					<td th:text="${clima.getHumedad()}">Humedad</td>
+					<td th:text="${clima.getEstado().getDsc_estado()}">Humedad</td>
+					<td th:text="${clima.getCiudad().getNombre_ciudad()}">Humedad</td>
+					
+					<td>
+						<a th:href="@{/consultar_clima/editar/{id}(id=${clima.getId_clima()})}" class="btn btn-info">Editar</a>
+						<a th:href="@{/consultar_clima/{id}(id=${clima.getId_clima()})}" class="btn btn-danger">Eliminar</a>
+					</td>
+				
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</body>
+
+</html>

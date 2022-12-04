@@ -58,16 +58,26 @@ public class ConsutaClimaController {
 	@PostMapping("/clima/agregar")
 	public String guardarCiudad(@Valid @ModelAttribute("climaForm") ClimaForm climaForm, BindingResult result, Model modelo) {
 
-		if (result.hasErrors()) {
+		if (result.hasErrors()) 
+		{
 			modelo.addAttribute("climaForm", climaForm);
 			System.out.println("Hubo errores");
 			return "crear_clima";
 		}
 		
-		Clima clima = climaForm.toModel();
-		servicioClima.guardarClima(clima);
-		
-		return "redirect:/consultar_clima";
+		try 
+		{
+			Clima clima = climaForm.toModel();
+			servicioClima.guardarClima(clima);
+			
+			return "redirect:/consultar_clima";
+		} 
+		catch (Exception e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "redirect:/";
 	}
 
 	@GetMapping("/consultar_clima/editar/{id}")
@@ -80,28 +90,50 @@ public class ConsutaClimaController {
 	public String actualizarClima(@PathVariable Long id, @Valid @ModelAttribute("climaForm") ClimaForm climaForm, BindingResult result, Model modelo) {
 		Clima climaExistente = servicioClima.obtenerClimaId(id);
 
-		if (result.hasErrors()) {
+		if (result.hasErrors()) 
+		{
 			//modelo.addAttribute("climaForm", climaForm); //Muestra los mensajes pero luego de un Error el metodo POST es incompatible 
 			modelo.addAttribute("climaForm", climaExistente);
 			System.out.println("Hubo errores");
 			return "editar_clima";
 		}							 
 
-		climaExistente.setFecha(climaForm.getFecha());
-		climaExistente.setTemperatura(climaForm.getTemperatura());
-		climaExistente.setHumedad(climaForm.getHumedad());
-		climaExistente.setEstado(climaForm.getEstado());
-		climaExistente.setCiudad(climaForm.getCiudad());
-		servicioClima.actualizarClima(climaExistente);
+		try 
+		{
+			climaExistente.setFecha(climaForm.getFecha());
+			climaExistente.setTemperatura(climaForm.getTemperatura());
+			climaExistente.setHumedad(climaForm.getHumedad());
+			climaExistente.setEstado(climaForm.getEstado());
+			climaExistente.setCiudad(climaForm.getCiudad());
+			servicioClima.actualizarClima(climaExistente);
 
-		return "redirect:/consultar_clima";
+			return "redirect:/consultar_clima";
+		} 
+		catch (Exception e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "redirect:/";
 	}
 
 	@GetMapping("/consultar_clima/{id}")
 	public String eliminarClima(@PathVariable Long id, @ModelAttribute("clima") Clima clima, Model modelo) {
-		Clima climaExistente = servicioClima.obtenerClimaId(id);
-		servicioClima.eliminarClima(climaExistente);
-		return "redirect:/consultar_clima";
+		
+		try 
+		{
+			Clima climaExistente = servicioClima.obtenerClimaId(id);
+			servicioClima.eliminarClima(climaExistente);
+			return "redirect:/consultar_clima";
+		} 
+		catch (Exception e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "redirect:/";
 	}
 
 }

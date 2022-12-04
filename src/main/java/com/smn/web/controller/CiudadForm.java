@@ -10,7 +10,7 @@ public class CiudadForm {
 	
 	private Long id_ciudad;
 	
-	@Size(min=4, max=10, message = "Nombre Ciudad, debe tener entre 4 a 10 caracteres")
+	@Size(min=4, max=15, message = "Nombre Ciudad, debe tener entre 4 a 15 caracteres")
 	private String nombre_ciudad;
 	
 	@NotNull

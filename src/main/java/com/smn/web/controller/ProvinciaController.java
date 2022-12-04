@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.smn.web.model.Ciudad;
 import com.smn.web.model.Provincia;
+import com.smn.web.service.CiudadServiceImpl;
 import com.smn.web.service.ProvinciaServiceImpl;
 
 @Controller
@@ -21,6 +23,9 @@ public class ProvinciaController {
 
 	@Autowired
 	private ProvinciaServiceImpl servicio;
+	
+	@Autowired
+	private CiudadServiceImpl servicioCiudad;
 
 	@GetMapping("/provincias")
 	public String listarProvincias(Model modelo) {
@@ -44,15 +49,26 @@ public class ProvinciaController {
 	public String guardarProvincia(@Valid @ModelAttribute("provincia") Provincia provincia, BindingResult result,
 			Model modelo) {
 
-		if (result.hasErrors()) {
+		if (result.hasErrors()) 
+		{
 			modelo.addAttribute("provincia", provincia);
 			System.out.println("Hubo errores");
 			return "crear_provincia";
 		}
 
-		provincia.setNombre_provincia(provincia.getNombre_provincia().toUpperCase());
-		servicio.guardarProvincia(provincia);
-		return "redirect:/provincias";
+		try 
+		{
+			provincia.setNombre_provincia(provincia.getNombre_provincia().toUpperCase());
+			servicio.guardarProvincia(provincia);
+			return "redirect:/provincias";
+		} 
+		catch (Exception e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "redirect:/";
 	}
 
 	@GetMapping("/provincias/editar/{id}")
@@ -65,21 +81,54 @@ public class ProvinciaController {
 	public String actualizarProvincia(@PathVariable Long id, @Valid @ModelAttribute("provincia") Provincia provincia, BindingResult result, Model modelo) {
 		Provincia provinciaExistente = servicio.obtenerProvinciaId(id);
 
-		if (result.hasErrors()) {
+		if (result.hasErrors()) 
+		{
 			modelo.addAttribute("provincia", provinciaExistente);
 			System.out.println("Hubo errores");
-			return "crear_editar";
+			return "editar_provincia";
 		}
 
-		provinciaExistente.setNombre_provincia(provincia.getNombre_provincia().toUpperCase());
-		servicio.actualizarProvincia(provinciaExistente);
-		return "redirect:/provincias";
+		try 
+		{
+			provinciaExistente.setNombre_provincia(provincia.getNombre_provincia().toUpperCase());
+			servicio.actualizarProvincia(provinciaExistente);
+			return "redirect:/provincias";
+		} 
+		catch (Exception e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "redirect:/";
 	}
 
 	@GetMapping("/provincias/{id}")
 	public String eliminarProvincia(@PathVariable Long id) {
-		servicio.eliminarProvincia(id);
-		return "redirect:/provincias";
+		
+		List<Ciudad> listaCiudades = servicioCiudad.listarCiudades();
+		
+		for (Ciudad ciudad : listaCiudades) 
+		{	
+			if(ciudad.getProvincia().getId_provincia() == id)
+			{
+				servicioCiudad.eliminarCiudad(ciudad);
+			}
+		}
+		
+		try 
+		{
+			Provincia provinciaExistente = servicio.obtenerProvinciaId(id);
+			servicio.eliminarProvincia(provinciaExistente);
+			return "redirect:/provincias";
+		} 
+		catch (Exception e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "redirect:/";
 	}
 
 }

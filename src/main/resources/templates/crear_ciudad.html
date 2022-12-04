@@ -38,7 +38,6 @@
 				<div class="form-group">
 					<label>Provincia: </label>
 					<select th:field="*{provincia}">
-					  	<option value="{null}" text="opcion"></option>
 		         		<option th:each="p : ${allProvincias}" 
 				          	th:value="${p.id_provincia}" 
 				          	th:text="${p.nombre_provincia}"></option>

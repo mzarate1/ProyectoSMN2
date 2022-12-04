@@ -14,6 +14,6 @@ public interface ProvinciaService {
 	
 	public Provincia actualizarProvincia(Provincia provincia);
 	
-	public void eliminarProvincia(Long id);
+	public void eliminarProvincia(Provincia provincia);
 	
 }

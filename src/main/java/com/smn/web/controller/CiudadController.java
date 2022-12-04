@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.smn.web.model.Ciudad;
+import com.smn.web.model.Clima;
 import com.smn.web.model.Provincia;
 import com.smn.web.service.CiudadServiceImpl;
+import com.smn.web.service.ClimaServiceImpl;
 import com.smn.web.service.ProvinciaServiceImpl;
 
 @Controller
@@ -25,6 +27,9 @@ public class CiudadController {
 
 	@Autowired
 	private ProvinciaServiceImpl servicioProvincia;
+	
+	@Autowired
+	private ClimaServiceImpl servicioClima;
 
 	@GetMapping("/ciudades")
 	public String listarCiudades(Model modelo) {
@@ -52,15 +57,25 @@ public class CiudadController {
 	@PostMapping("/ciudad/agregar")
 	public String guardarCiudad(@Valid @ModelAttribute("ciudadForm") CiudadForm ciudadForm, BindingResult result, Model modelo) {
 
-		if (result.hasErrors()) {
+		if (result.hasErrors()) 
+		{
 			modelo.addAttribute("ciudadForm", ciudadForm);
 			System.out.println("Hubo errores");
 			return "crear_ciudad";
 		}
-		//ciudad.setNombre_ciudad(ciudad.getNombre_ciudad().toLowerCase());
-		Ciudad ciudad = ciudadForm.toModel(); 
-		servicio.guardarCiudad(ciudad);
-		return "redirect:/ciudades";
+		try 
+		{
+			//ciudad.setNombre_ciudad(ciudad.getNombre_ciudad().toLowerCase());
+			Ciudad ciudad = ciudadForm.toModel(); 
+			servicio.guardarCiudad(ciudad);
+			return "redirect:/ciudades";
+		} catch (Exception e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "redirect:/";
 	}
 
 	@GetMapping("/ciudades/editar/{id}")
@@ -73,24 +88,55 @@ public class CiudadController {
 	public String actualizarCiudad(@PathVariable Long id, @Valid @ModelAttribute("ciudadForm") CiudadForm ciudadForm, BindingResult result, Model modelo) {
 		Ciudad ciudadExistente = servicio.obtenerCiudadId(id);
 
-		if (result.hasErrors()) {
+		if (result.hasErrors()) 
+		{
 			//modelo.addAttribute("ciudadForm", ciudadForm);
 			modelo.addAttribute("ciudadForm", ciudadExistente);
 			System.out.println("Hubo errores");
 			return "editar_ciudad";
 		}
 
-		ciudadExistente.setNombre_ciudad(ciudadForm.getNombre_ciudad());
-		ciudadExistente.setProvincia(ciudadForm.getProvincia());
-		servicio.actualizarCiudad(ciudadExistente);
-		return "redirect:/ciudades";
+		try 
+		{
+			ciudadExistente.setNombre_ciudad(ciudadForm.getNombre_ciudad());
+			ciudadExistente.setProvincia(ciudadForm.getProvincia());
+			servicio.actualizarCiudad(ciudadExistente);
+			return "redirect:/ciudades";
+		} 
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "redirect:/";
 	}
 
 	@GetMapping("/ciudades/{id}")
 	public String eliminarCiudad(@PathVariable Long id, @ModelAttribute("ciudad") Ciudad ciudad, Model modelo) {
-		Ciudad ciudadExistente = servicio.obtenerCiudadId(id);
-		servicio.eliminarCiudad(ciudadExistente);
-		return "redirect:/ciudades";
+		
+		List<Clima> listaClima = servicioClima.listarClimas();
+		
+		for (Clima clima : listaClima) 
+		{
+			if(clima.getCiudad().getId_ciudad() == id) 
+			{
+				servicioClima.eliminarClima(clima);
+			}
+		}
+		
+		try 
+		{
+			Ciudad ciudadExistente = servicio.obtenerCiudadId(id);
+			servicio.eliminarCiudad(ciudadExistente);
+			return "redirect:/ciudades";
+		} 
+		catch (Exception e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "redirect:/";
 	}
 
 }

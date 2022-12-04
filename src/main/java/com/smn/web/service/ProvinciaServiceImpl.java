@@ -35,8 +35,8 @@ public class ProvinciaServiceImpl implements ProvinciaService {
 	}
 
 	@Override
-	public void eliminarProvincia(Long id) {
-		repositorio.deleteById(id);
+	public void eliminarProvincia(Provincia provincia) {
+		repositorio.delete(provincia);;
 	}
 
 }

@@ -3,7 +3,11 @@ package com.smn.web.service;
 import java.util.List;
 
 import com.smn.web.model.Clima;
-
+/**
+ * 
+ * @author Kruger Lisandro
+ *
+ */
 public interface ClimaService {
 	
 	public List<Clima> listarClimas();

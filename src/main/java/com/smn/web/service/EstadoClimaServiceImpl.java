@@ -7,7 +7,11 @@ import org.springframework.stereotype.Service;
 
 import com.smn.web.model.EstadoClima;
 import com.smn.web.repository.EstadoClimaRepository;
-
+/**
+ * 
+ * @author Kruger Lisandro
+ *
+ */
 @Service
 public class EstadoClimaServiceImpl implements EstadoClimaService {
 
@@ -17,26 +21,6 @@ public class EstadoClimaServiceImpl implements EstadoClimaService {
 	@Override
 	public List<EstadoClima> listarEstadoClima() {
 		return repositorio.findAll();
-	}
-
-	@Override
-	public EstadoClima guardarEstadoClima(EstadoClima estadoClima) {
-		return repositorio.save(estadoClima);
-	}
-
-	@Override
-	public EstadoClima obtenerEstadoClimaId(Long id) {
-		return repositorio.findById(id).get();
-	}
-
-	@Override
-	public EstadoClima actualizarEstadoClima(EstadoClima estadoClima) {
-		return repositorio.save(estadoClima);
-	}
-
-	@Override
-	public void eliminarEstadoClima(EstadoClima estadoClima) {
-		repositorio.delete(estadoClima);
 	}
 
 }

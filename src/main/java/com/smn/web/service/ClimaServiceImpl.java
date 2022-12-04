@@ -7,7 +7,11 @@ import org.springframework.stereotype.Service;
 
 import com.smn.web.model.Clima;
 import com.smn.web.repository.ClimaRepository;
-
+/**
+ * 
+ * @author Kruger Lisandro
+ *
+ */
 @Service
 public class ClimaServiceImpl implements ClimaService{
 	

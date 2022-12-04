@@ -18,7 +18,11 @@ import com.smn.web.model.Provincia;
 import com.smn.web.service.CiudadServiceImpl;
 import com.smn.web.service.ClimaServiceImpl;
 import com.smn.web.service.ProvinciaServiceImpl;
-
+/**
+ * 
+ * @author Kruger Lisandro
+ *
+ */
 @Controller
 public class CiudadController {
 

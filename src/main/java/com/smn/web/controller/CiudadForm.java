@@ -5,7 +5,11 @@ import javax.validation.constraints.Size;
 
 import com.smn.web.model.Ciudad;
 import com.smn.web.model.Provincia;
-
+/**
+ * 
+ * @author Kruger Lisandro
+ *
+ */
 public class CiudadForm {
 	
 	private Long id_ciudad;

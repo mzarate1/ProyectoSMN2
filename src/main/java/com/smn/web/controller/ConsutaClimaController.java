@@ -19,7 +19,11 @@ import com.smn.web.model.EstadoClima;
 import com.smn.web.service.CiudadServiceImpl;
 import com.smn.web.service.ClimaServiceImpl;
 import com.smn.web.service.EstadoClimaServiceImpl;
-
+/**
+ * 
+ * @author Kruger Lisandro
+ *
+ */
 @Controller
 public class ConsutaClimaController {
 

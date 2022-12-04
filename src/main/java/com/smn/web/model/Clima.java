@@ -12,7 +12,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
+/**
+ * 
+ * @author Kruger Lisandro
+ *
+ */
 @Entity
 @Table(name = "clima")
 public class Clima {

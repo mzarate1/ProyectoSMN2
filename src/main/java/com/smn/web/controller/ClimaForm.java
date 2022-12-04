@@ -11,7 +11,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.smn.web.model.Ciudad;
 import com.smn.web.model.Clima;
 import com.smn.web.model.EstadoClima;
-
+/**
+ * 
+ * @author Kruger Lisandro
+ *
+ */
 public class ClimaForm {
 	
 	private Long id_clima;

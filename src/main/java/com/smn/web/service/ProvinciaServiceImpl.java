@@ -7,7 +7,11 @@ import org.springframework.stereotype.Service;
 
 import com.smn.web.model.Provincia;
 import com.smn.web.repository.ProvinciaRepository;
-
+/**
+ * 
+ * @author Kruger Lisandro
+ *
+ */
 @Service
 public class ProvinciaServiceImpl implements ProvinciaService {
 

@@ -17,7 +17,11 @@ import com.smn.web.model.Ciudad;
 import com.smn.web.model.Provincia;
 import com.smn.web.service.CiudadServiceImpl;
 import com.smn.web.service.ProvinciaServiceImpl;
-
+/**
+ * 
+ * @author Kruger Lisandro
+ *
+ */
 @Controller
 public class ProvinciaController {
 

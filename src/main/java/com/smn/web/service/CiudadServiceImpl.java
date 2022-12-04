@@ -7,7 +7,11 @@ import org.springframework.stereotype.Service;
 
 import com.smn.web.model.Ciudad;
 import com.smn.web.repository.CiudadRepository;
-
+/**
+ * 
+ * @author Kruger Lisandro
+ *
+ */
 @Service
 public class CiudadServiceImpl implements CiudadService{
 	

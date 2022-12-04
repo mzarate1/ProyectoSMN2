@@ -9,7 +9,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
-
+/**
+ * 
+ * @author Kruger Lisandro
+ *
+ */
 @Entity
 @Table(name = "ciudad")
 public class Ciudad {

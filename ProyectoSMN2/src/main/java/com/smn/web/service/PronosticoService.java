@@ -5,6 +5,7 @@ import java.time.LocalDate;
 //import java.util.Date;
 import java.util.List;
 
+import com.smn.web.controller.PronosticoBuscarForm;
 import com.smn.web.model.Pronostico;
 
 
@@ -20,8 +21,8 @@ public interface PronosticoService {
 	
 	public void eliminarPronostico(Pronostico pronostico);
 	
-	//public List<Pronostico> filter(PronosticoBuscarForm filter);
-
 	public List<Pronostico> listarPronosticosFecha(LocalDate date);
+
+	public List<Pronostico> filter(PronosticoBuscarForm formBean);
 
 }

@@ -10,6 +10,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.smn.web.controller.PronosticoBuscarForm;
 import com.smn.web.model.Pronostico;
 import com.smn.web.repository.PronosticoRepository;
 
@@ -52,8 +53,8 @@ public class PronosticoServiceImpl implements PronosticoService {
 		repositorio.delete(pronostico);
 	}
 	
-	//public List<Pronostico> filter(PronosticoBuscarForm filter) {
-	//	return repositorio.findByFilter(filter.getIdCiudadSeleccionada(),filter.getFechaactual(),filter.getFechaextendida());
-	//}
+	public List<Pronostico> filter(PronosticoBuscarForm filter) {
+	return repositorio.findByFilter(filter.getIdCiudadSeleccionada(),filter.getFechaactual(),filter.getFechaextendida());
+	}
 
 }

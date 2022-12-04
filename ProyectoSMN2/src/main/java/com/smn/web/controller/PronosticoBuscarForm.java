@@ -31,8 +31,7 @@ public class PronosticoBuscarForm {
 	public void setFechaextendida(Date fechaextendida) {
 		Fechaextendida = fechaextendida;
 	}
-	
-	}
+}
 		
 
 

@@ -54,7 +54,6 @@ public class PronosticoBuscarController {
     @RequestMapping( method=RequestMethod.POST)
     public String submit( @ModelAttribute("formBean")  @Validated  PronosticoBuscarForm formBean,BindingResult result, ModelMap modelo,@RequestParam String action) {
          	
-    	
     	if(action.equals("Buscar"))
     	{
     		try {

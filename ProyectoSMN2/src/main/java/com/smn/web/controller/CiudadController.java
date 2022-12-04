@@ -1,9 +1,13 @@
 package com.smn.web.controller;
 
 import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,42 +22,66 @@ public class CiudadController {
 
 	@Autowired
 	private CiudadServiceImpl servicio;
-	
+
 	@Autowired
 	private ProvinciaServiceImpl servicioProvincia;
 
 	@GetMapping("/ciudades")
 	public String listarCiudades(Model modelo) {
 		modelo.addAttribute("ciudades", servicio.listarCiudades());
-		return "ciudades"; // nos retorna el archivo provincias
+		return "ciudades";
 	}
-		
-	@GetMapping("/ciudades/nuevo")
+
+	@ModelAttribute("allCiudades")
+	public List<Ciudad> getAllCiudades() {
+		return this.servicio.listarCiudades();
+	}
+
+	@ModelAttribute("allProvincias")
+	public List<Provincia> getAllProvincias() {
+		return this.servicioProvincia.listarProvincias();
+	}
+
+	@GetMapping("/ciudad/nuevo")
 	public String mostrarFomularioCiudad(Model modelo) {
-		Ciudad ciudad = new Ciudad ();
-		modelo.addAttribute("ciudades", ciudad);
+		CiudadForm ciudadForm = new CiudadForm();
+		modelo.addAttribute("ciudadForm", ciudadForm);
 		return "crear_ciudad";
 	}
-	
-	
-	@PostMapping("/ciudades")
-	public String guardarCiudad(@ModelAttribute("ciudad") Ciudad ciudad) {
+
+	@PostMapping("/ciudad/agregar")
+	public String guardarCiudad(@Valid @ModelAttribute("ciudadForm") CiudadForm ciudadForm, BindingResult result, Model modelo) {
+
+		if (result.hasErrors()) {
+			modelo.addAttribute("ciudadForm", ciudadForm);
+			System.out.println("Hubo errores");
+			return "crear_ciudad";
+		}
+		//ciudad.setNombre_ciudad(ciudad.getNombre_ciudad().toLowerCase());
+		Ciudad ciudad = ciudadForm.toModel(); 
 		servicio.guardarCiudad(ciudad);
 		return "redirect:/ciudades";
 	}
-	
-	
+
 	@GetMapping("/ciudades/editar/{id}")
 	public String mostrarFormularioEditar(@PathVariable Long id, Model modelo) {
-		modelo.addAttribute("ciudad", servicio.obtenerCiudadId(id));
+		modelo.addAttribute("ciudadForm", servicio.obtenerCiudadId(id));
 		return "editar_ciudad";
 	}
 
 	@PostMapping("/ciudades/{id}")
-	public String actualizarCiudad(@PathVariable Long id, @ModelAttribute("ciudad") Ciudad ciudad, Model modelo) {
+	public String actualizarCiudad(@PathVariable Long id, @Valid @ModelAttribute("ciudadForm") CiudadForm ciudadForm, BindingResult result, Model modelo) {
 		Ciudad ciudadExistente = servicio.obtenerCiudadId(id);
-		ciudadExistente.setNombre_ciudad(ciudad.getNombre_ciudad());
-		ciudadExistente.setId_provincia(ciudad.getId_provincia());
+
+		if (result.hasErrors()) {
+			//modelo.addAttribute("ciudadForm", ciudadForm);
+			modelo.addAttribute("ciudadForm", ciudadExistente);
+			System.out.println("Hubo errores");
+			return "editar_ciudad";
+		}
+
+		ciudadExistente.setNombre_ciudad(ciudadForm.getNombre_ciudad());
+		ciudadExistente.setId_provincia(ciudadForm.getId_provincia());
 		servicio.actualizarCiudad(ciudadExistente);
 		return "redirect:/ciudades";
 	}
@@ -64,8 +92,5 @@ public class CiudadController {
 		servicio.eliminarCiudad(ciudadExistente);
 		return "redirect:/ciudades";
 	}
-	@ModelAttribute("allProvincias")
-    public List<Provincia> getAllProvincias() {
-        return this.servicioProvincia.listarProvincias();
-    }
+
 }

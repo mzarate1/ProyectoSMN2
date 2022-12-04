@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf 8">
+	<title>Listado de Pronosticos</title>
+	<!-- CSS only -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+	<a class="navbar-brand" href="#"></a>
+	<!-- Navbar links-->
+	<div class="collapse navbar-collapse" id="collapsibleNavbar">
+		<ul class="navbar-nav">
+			<li class="nav-item"><a class="nav-link"
+				th:href="@{/}">Volver</a></li>
+			<li class="nav-item"><a class="nav-link"
+			th:href="@{/pronostico/nuevo}">Agregar Pronostico</a></li>
+		</ul>
+	</div>
+	</nav>
+	
+	<div class="container">
+		<div class="row">
+			<h1>Pronosticos registrados</h1>
+		</div>
+	
+	<form  th:action="@{/consultar_pronostico}" th:object="${listado_pronostico}" method="post">
+	</table>
+	<br>
+	<table class="table table-striped table-bordered">
+		<thead>
+			<tr>
+					<th>Fecha Pronostico</th>
+					<th>Probabilidad de LLuvia</th>
+					<th>Cantidad en mm Lluvia</th>
+					<th>Descripcion del Pronostico</th>
+					<th>Ciudad</th>
+			</tr>
+		</thead>
+			<tbody>
+				<tr th:each="pronostico : ${listado_pronostico}">
+					<td th:text="${pronostico.getFecha_pronostico()}">Fecha</td>
+					<td th:text="${pronostico.getProbabilidad_lluvia()}">Probabilidad Lluvia</td>
+					<td th:text="${pronostico.getCant_lluvia()}">Cant mm Lluvia</td>
+					<td th:text="${pronostico.getDsc_pronostico()}">Descripción Lluvia</td>
+					<td th:text="${pronostico.getId_ciudad().getNombre_ciudad()}">Ciudad</td>
+					
+					<td>
+						<a th:href="@{/consultar_pronostico/editar/{id}(id=${pronostico.getId_pronostico()})}" class="btn btn-info">Editar</a>
+					</td>
+				
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</body>
+
+</html>

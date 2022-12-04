@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf 8">
-	<title>Crear Clima</title>
+	<title>Registrar Pronostico</title>
 	<!-- CSS only -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
@@ -11,7 +11,7 @@
 
 <script>
     $(document).ready(function(){
-      var date_input=$('input[name="fecha"]'); 
+      var date_input=$('input[name="fecha_pronostico"]'); 
       var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
       var options={
         format: 'yyyy/MM/dd',
@@ -39,41 +39,31 @@
 	<div class="container">
 		</div>
 			<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
-				<h1 class="text-center">Nuevo Registro del Clima</h1>
+				<h1 class="text-center">Nuevo Registro de Pronostico</h1>
 			<div class="card-body">
-			<form  th:action="@{/clima/agregar}" th:object="${climaForm}" method="POST">
+			<form  th:action="@{/pronostico/agregar}" th:object="${pronosticoForm}" method="POST">
 				<tr>
 				<div class="form-group">
 					<label>Fecha: </label>
 					<br>
-					<!-- <input type="text" name="fecha" th:field="*{fecha}" class="form-control" placeholder="fecha" required>-->
-					<input type="text" id="fecha" name="fecha" autocomplete="off" th:field="*{fecha}" placeholder="yyyy/MM/dd"/>
-					<td> <p class="form text text-danger" th:if="${#fields.hasErrors('fecha')}" th:errorclass="error" th:errors="*{fecha}"/> </td>
+					<input type="text" id="fecha_pronostico" name="fecha_pronostico" autocomplete="off" th:field="*{fecha_pronostico}" placeholder="yyyy/MM/dd"/>
+					<td> <p class="form text text-danger" th:if="${#fields.hasErrors('fecha_pronostico')}" th:errorclass="error" th:errors="*{fecha_pronostico}"/> </td>
 					<br>
-					<label>Temperatura: </label>
-					<input type="text" name="temperatura" th:field="*{temperatura}" class="form-control" placeholder="temperatura" required/>
-					<td> <p class="form text text-danger" th:if="${#fields.hasErrors('temperatura')}" th:errorclass="error" th:errors="*{temperatura}"/> </td>
-					<label>Humedad: </label>
-					<input type="text" name="humedad" th:field="*{humedad}" class="form-control" placeholder="humedad" required/>
-					<td> <p class="form text text-danger" th:if="${#fields.hasErrors('humedad')}" th:errorclass="error" th:errors="*{humedad}"/> </td>
+					<label>Probabilidad de Lluvia (%): </label>
+					<input type="text" name="probabilidad_lluvia" th:field="*{probabilidad_lluvia}" class="form-control" placeholder="probabilidad_lluvia" required/>
+					<td> <p class="form text text-danger" th:if="${#fields.hasErrors('probabilidad_lluvia')}" th:errorclass="error" th:errors="*{probabilidad_lluvia}"/> </td>
+					<label>Cantidad en mm de lluvia: </label>
+					<input type="text" name="cant_lluvia" th:field="*{cant_lluvia}" class="form-control" placeholder="cant_lluvia" required/>
+					<td> <p class="form text text-danger" th:if="${#fields.hasErrors('cant_lluvia')}" th:errorclass="error" th:errors="*{cant_lluvia}"/> </td>
+					<label>Descripción el pronóstico: </label>
+					<input type="text" name="dsc_pronostico" th:field="*{dsc_pronostico}" class="form-control" placeholder="dsc_pronostico" required/>
+					<td> <p class="form text text-danger" th:if="${#fields.hasErrors('dsc_pronostico')}" th:errorclass="error" th:errors="*{dsc_pronostico}"/> </td>
 				</div>
 				</tr>
-				<div class="form-group">
-					<label>Estado del Clima: </label>
-					<br>
-					<select th:field="*{id_estado}">
-					<!--<option value="{null}" text="opcion"></option>-->
-		         		<option th:each="ec : ${allEstadoClimas}" 
-				          	th:value="${ec.id_estado}" 
-				          	th:text="${ec.dsc_estado}"></option>
-					</select>
-				<td> <p class="form text text-danger" th:if="${#fields.hasErrors('id_estado')}" th:errorclass="error" th:errors="*{id_estado}"/> </td>
-				</div>
 				<div class="form-group">
 					<label>Ciudad: </label>
 					<br>
 					<select th:field="*{id_ciudad}">
-					<!--<option value="{null}" text="opcion"></option>-->
 		         		<option th:each="c : ${allCiudades}" 
 				          	th:value="${c.id_ciudad}" 
 				          	th:text="${c.nombre_ciudad}"></option>

@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "pronostico")
 public class Pronostico {
@@ -19,17 +21,18 @@ public class Pronostico {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_pronostico;
 	
-	@Column(name = "fechaPronostico", nullable = false)
-	private Date fechaPronostico;
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	@Column(name = "fecha_pronostico", nullable = false)
+	private Date fecha_pronostico;
 	
-	@Column(name = "probabilidadLluvia", nullable = false)
-	private int probabilidadLluvia;
+	@Column(name = "probabilidad_lluvia", nullable = false)
+	private int probabilidad_lluvia;
 	
-	@Column(name = "cantLluvia", nullable = false)
-	private int cantLluvia;
+	@Column(name = "cant_lluvia", nullable = false)
+	private int cant_lluvia;
 	
-	@Column(name = "dscPronostico", nullable = false)
-	private String dscPronostico;
+	@Column(name = "dsc_pronostico", nullable = false)
+	private String dsc_pronostico;
 	
 	@JoinColumn(name = "id_ciudad", nullable = false)
 	@ManyToOne()
@@ -39,23 +42,31 @@ public class Pronostico {
 		super();
 	}
 
-	public Pronostico(Date fechaPronostico, int probabilidadLluvia, int cantLluvia, Ciudad id_ciudad, String dscPronostico) {
+	public Pronostico(Date fecha_pronostico, int probabilidad_lluvia, int cant_lluvia, Ciudad id_ciudad, String dsc_pronostico) {
 		super();
-		this.fechaPronostico = fechaPronostico;
-		this.probabilidadLluvia = probabilidadLluvia;
-		this.cantLluvia = cantLluvia;
+		this.fecha_pronostico = fecha_pronostico;
+		this.probabilidad_lluvia = probabilidad_lluvia;
+		this.cant_lluvia = cant_lluvia;
 		this.id_ciudad = id_ciudad;
-		this.dscPronostico = dscPronostico;
+		this.dsc_pronostico = dsc_pronostico;
 	}
 
-	public Pronostico(Long id_pronostico, Date fechaPronostico, int probabilidadLluvia, int cantLluvia, Ciudad id_ciudad, String dscPronostico) {
+	public Pronostico(Long id_pronostico, Date fecha_pronostico, int probabilidad_lluvia, int cant_lluvia, Ciudad id_ciudad, String dsc_pronostico) {
 		super();
 		this.id_pronostico = id_pronostico;
-		this.fechaPronostico = fechaPronostico;
-		this.probabilidadLluvia = probabilidadLluvia;
-		this.cantLluvia = cantLluvia;
+		this.fecha_pronostico = fecha_pronostico;
+		this.probabilidad_lluvia = probabilidad_lluvia;
+		this.cant_lluvia = cant_lluvia;
 		this.id_ciudad = id_ciudad;
-		this.dscPronostico = dscPronostico;
+		this.dsc_pronostico = dsc_pronostico;
+	}
+
+	public Ciudad getId_ciudad() {
+		return id_ciudad;
+	}
+
+	public void setId_ciudad(Ciudad id_ciudad) {
+		this.id_ciudad = id_ciudad;
 	}
 
 	public Long getId_pronostico() {
@@ -66,51 +77,38 @@ public class Pronostico {
 		this.id_pronostico = id_pronostico;
 	}
 
-	public Date getFechapronostico() {
-		return fechaPronostico;
+	public Date getFecha_pronostico() {
+		return fecha_pronostico;
 	}
 
-	public void setFechapronostico(Date fechaPronostico) {
-		this.fechaPronostico = fechaPronostico;
+	public void setFecha_pronostico(Date fecha_pronostico) {
+		this.fecha_pronostico = fecha_pronostico;
 	}
 
-	public int getprobabilidadLluvia() {
-		return probabilidadLluvia;
+	public int getProbabilidad_lluvia() {
+		return probabilidad_lluvia;
 	}
 
-	public void setprobabilidadLluvia(int probabilidadLluvia) {
-		this.probabilidadLluvia = probabilidadLluvia;
+	public void setProbabilidad_lluvia(int probabilidad_lluvia) {
+		this.probabilidad_lluvia = probabilidad_lluvia;
 	}
 
-	public int getcantLluvia() {
-		return cantLluvia;
+	public int getCant_lluvia() {
+		return cant_lluvia;
 	}
 
-	public void setcantLluvia(int cantLluvia) {
-		this.cantLluvia = cantLluvia;
+	public void setCant_lluvia(int cant_lluvia) {
+		this.cant_lluvia = cant_lluvia;
 	}
 
-	
-	public Ciudad getId_ciudad() {
-		return id_ciudad;
+	public String getDsc_pronostico() {
+		return dsc_pronostico;
 	}
 
-	public void setId_ciudad(Ciudad id_ciudad) {
-		this.id_ciudad = id_ciudad;
-	}
-	
-	public String getdscPronostico() {
-		return dscPronostico;
+	public void setDsc_pronostico(String dsc_pronostico) {
+		this.dsc_pronostico = dsc_pronostico;
 	}
 
-	public void setdscPronostico(String dscPronostico) {
-		this.dscPronostico = dscPronostico;
-	}
 
-	@Override
-	public String toString() {
-		return "Pronostico [id_pronostico=" + id_pronostico + ", fecha=" + fechaPronostico + ", probabilidad Lluvia=" + probabilidadLluvia + ", cant. Lluvia="
-				+ cantLluvia + ", dsc pronostico=" + dscPronostico + ", ciudad=" + id_ciudad + "]";
-	}
 	
 }

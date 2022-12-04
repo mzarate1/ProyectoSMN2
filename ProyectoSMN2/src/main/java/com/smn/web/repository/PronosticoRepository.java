@@ -1,7 +1,8 @@
 package com.smn.web.repository;
 
 
-import java.util.Date;
+
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,7 +14,13 @@ import com.smn.web.model.Pronostico;
 @Repository
 public interface PronosticoRepository extends JpaRepository<Pronostico, Long> {
 
-	@Query("SELECT p FROM Pronostico p WHERE p.ciudad.id_ciudad=?1 and (p.fechaPronostico>=?2 and p.fechaPronostico < =?3)")
-	List<Pronostico> findByIdCiudadFecha(Long idCiudadSeleccionada, Date fechaactual, Date fechaextendida);
+
+	//@Query(value = "SELECT * FROM Pronostico WHERE p.id_ciudad=?0 and p.fechaPronostico>=?1 and p.fechaPronostico <=?2", nativeQuery = true)
+	//List<Pronostico> findByFilter(Long idCiudadSeleccionada, Date fechaactual, Date fechaextendida);
+	
+@Query(value = "SELECT * FROM Pronostico WHERE DATE_FORMAT(p.fecha_pronostico, \"%d/%m/%Y\") > ?0", nativeQuery = true)
+List<Pronostico> findByFecha(LocalDate date);
+	
+
 
 }

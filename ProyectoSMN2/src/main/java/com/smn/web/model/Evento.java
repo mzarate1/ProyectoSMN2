@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "evento")
 public class Evento {
@@ -19,6 +21,7 @@ public class Evento {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_evento;
 	
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	@Column(name = "fechaevento", nullable = false)
 	private Date fechaevento;
 		
